@@ -1,0 +1,15 @@
+*
+!.gitignore
+!.dir_colors
+!.xinitrc.awesome
+!.Xresources
+!.zsh_colors
+!.zshrc
+
+!.dynamic-colors
+!.dynamic-colors/**
+
+!.config
+!.config/awesome/
+!.config/awesome/**
+

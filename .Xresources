@@ -1,0 +1,98 @@
+!! xrdb .Xresources
+
+URxvt.depth: 32
+URxvt.scrollBar: false
+
+URxvt*dynamicColors: true
+
+URxvt.secondaryScroll: true
+URxvt.loginShell: true
+URxvt.borderLess: false
+URxvt.internalBorder: 0
+URxvt.externalBorder: 0
+
+URxvt.font: xft: Anonymous Pro-10
+!!URxvt.font: xft: Anonymous Pro-20
+URxvt.boldFont:
+URxvt.boldItalicFont:
+URxvt.perl-ext-common: default,clipboard
+URxvt.modifier: mod4
+URxvt.scrollTtyOutput: true
+Urxvt.scrollWithBuffer: true
+Urxvt.scrollTtyKeypress: true
+Urxvt.saveLines: 5000
+
+!*.color0: #000000
+!*.color1: #ff5555
+!*.color2: #55ff55
+!*.color3: #aa5500
+!*.color4: #5555ff
+!*.color5: #ff55ff
+!*.color6: #00aaaa
+!*.color7: #aaaaaa
+
+!*.color8: #555555
+!*.color9: #ff5555
+!*.color10: #55ff55
+!*.color11: #ffff55
+!*.color12: #5555ff
+!*.color13: #ff55ff
+!*.color14: #55ffff
+!*.color15: #ffffff
+
+!! drop in Solarized colorscheme for Xresources/Xdefaults
+
+#define S_base03        #001d26
+#define S_base02        #073642
+#define S_base01        #586e75
+#define S_base00        #657b83
+#define S_base0         #839496
+#define S_base1         #93a1a1
+#define S_base2         #eee8d5
+#define S_base3         #fdf6e3
+#define S_yellow        #b58900
+#define S_orange        #cb4b16
+#define S_red           #dc322f
+#define S_magenta       #d33682
+#define S_violet        #6c71c4
+#define S_blue          #268bd2
+#define S_cyan          #2aa198
+#define S_green         #859900
+
+URxvt.background:            S_base03
+URxvt.foreground:            S_base00
+URxvt.cursorColor:           S_base1
+URxvt.pointerColorBackground:S_base01
+URxvt.pointerColorForeground:S_base1
+
+!! black dark/light
+URxvt.color0:                S_base02
+URxvt.color8:                S_base03
+
+!! red dark/light
+URxvt.color1:                S_red
+URxvt.color9:                S_orange
+
+!! green dark/light
+URxvt.color2:                S_green
+URxvt.color10:               S_base01
+
+!! yellow dark/light
+URxvt.color3:                S_yellow
+URxvt.color11:               S_base00
+
+!! blue dark/light
+URxvt.color4:                S_blue
+URxvt.color12:               S_base0
+
+!! magenta dark/light
+URxvt.color5:                S_magenta
+URxvt.color13:               S_violet
+
+!! cyan dark/light
+URxvt.color6:                S_cyan
+URxvt.color14:               S_base1
+
+!! white dark/light
+URxvt.color7:                S_base2
+URxvt.color15:               S_base3

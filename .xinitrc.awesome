@@ -1,0 +1,9 @@
+#!/bin/sh
+
+xrdb -merge ~/.Xresources
+setxkbmap "us, ru" -option grp:caps_toggle,grp_led:caps
+
+urxvtd -q -f -o
+xautolock -time 15 -corners 00-0 -cornersize 5 -locker 'i3lock -p default -c 1E2320' &
+
+exec awesome --no-argb &> /tmp/awesome.log
