@@ -5,7 +5,7 @@ awful.rules = require("awful.rules")
 -- Theme handling library
 beautiful = require("beautiful")
 -- Notification library
--- require("naughty")
+naughty = require('naughty')
 local wibox = require("wibox")
 
 local vicious = require("vicious")
