@@ -4,11 +4,15 @@ require("awful.autofocus")
 awful.rules = require("awful.rules")
 -- Theme handling library
 beautiful = require("beautiful")
--- Notification library
-naughty = require('naughty')
+-- Panel
 local wibox = require("wibox")
-
+-- Plugins
 local vicious = require("vicious")
+
+-- Notification library
+local naughty = require('naughty')
+-- Notifications history
+local notify_history = require("notify_history")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
@@ -208,7 +212,10 @@ globalkeys = awful.util.table.join(
     awful.key({                   }, "XF86KbdBrightnessUp", function () awful.util.spawn("asus-kbd-backlight up") end),
     awful.key({                   }, "XF86KbdBrightnessDown", function () awful.util.spawn("asus-kbd-backlight down") end),
 
-    awful.key({ modkey,           }, "F12", function () awful.util.spawn("xautolock -locknow", false) end)
+    awful.key({ modkey,           }, "F12", function () awful.util.spawn("xautolock -locknow", false) end),
+ 
+    awful.key({ modkey,           }, "p", function () notify_history.show_history(5) end),
+    awful.key({ modkey, "Shift"   }, "p", function () notify_history.show_history(15) end)
 )
 
 clientkeys = awful.util.table.join(
