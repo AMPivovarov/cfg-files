@@ -40,6 +40,7 @@ WORDCHARS='*?_-.[]~=&;!@#$%^(){}<>'
 setopt APPEND_HISTORY HIST_REDUCE_BLANKS HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE
 setopt NO_BEEP 
 setopt AUTO_CD
+setopt extendedglob
 
 typeset -U path cdpath fpath manpath
 
@@ -130,3 +131,4 @@ display () {
 
 zstyle ':completion:*' menu yes select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
