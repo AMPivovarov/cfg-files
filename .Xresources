@@ -11,7 +11,9 @@ URxvt.borderLess: false
 URxvt.internalBorder: 0
 URxvt.externalBorder: 0
 
-URxvt.font: xft: Anonymous Pro-10
+URxvt.font: xft:Source Code Pro:size=12
+!!URxvt.font: xft: Anonymous Pro-10
+!!URxvt.font: xft: Anonymous Pro-13
 !!URxvt.font: xft: Anonymous Pro-20
 URxvt.boldFont:
 URxvt.boldItalicFont:
