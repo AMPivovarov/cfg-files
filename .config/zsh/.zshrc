@@ -90,3 +90,6 @@ alias wlan='sudo netctl'
 
 alias start_vm='setsid VBoxHeadless --startvm Kernel 1>~/.stdout 2>~/.stderr &'
 alias stop_vm='VBoxManage controlvm Kernel poweroff'
+
+alias ...='cd ../..'
+alias ....='cd ../../..'
