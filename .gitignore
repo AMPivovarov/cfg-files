@@ -5,6 +5,7 @@
 !.Xresources
 !.zsh_colors
 !.zshrc
+!.zshenv
 
 !.dynamic-colors
 !.dynamic-colors/**
