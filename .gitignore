@@ -13,3 +13,6 @@
 !.config/awesome/
 !.config/awesome/**
 
+!.config/zsh/
+!.config/zsh/plugins
+!.config/zsh/plugins/**
