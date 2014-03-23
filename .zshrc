@@ -27,9 +27,9 @@ autoload -U colors
 colors
 
 if [ $HOST = 'ASUS-LEMM' ] ; then
-	PROMPT="${fg_lred}%n${fg_default}:${fg_blue}%~${fg_default}$ "
+    PROMPT="${fg_lred}%n${fg_default}:${fg_blue}%~${fg_default}$ "
 else
-	PROMPT="${fg_lred}%n${fg_default}@${fg_green}%m${fg_default}:${fg_blue}%~${fg_default}$ "
+    PROMPT="${fg_lred}%n${fg_default}@${fg_green}%m${fg_default}:${fg_blue}%~${fg_default}$ "
 fi
 
 HISTSIZE=1000
@@ -76,18 +76,18 @@ alias stop_vm='VBoxManage controlvm Kernel poweroff'
 unpack () {
     if [ -f $1 ] ; then
         case $1 in
-            *.tar.bz2)   tar xjf $1		;;
-            *.tar.gz)    tar xzf $1  	;;
+            *.tar.bz2)   tar xjf $1     ;;
+            *.tar.gz)    tar xzf $1     ;;
             *.tar.xz)    tar xJf $1     ;;
-            *.bz2)       bunzip2 $1    	;;
+            *.bz2)       bunzip2 $1     ;;
             *.rar)       unrar x $1     ;;
-            *.gz)        gunzip $1     	;;
+            *.gz)        gunzip $1      ;;
             *.tar)       tar xf $1      ;;
             *.tbz2)      tar xjf $1     ;;
             *.tgz)       tar xzf $1     ;;
-            *.zip)       unzip $1     	;;
+            *.zip)       unzip $1       ;;
             *.Z)         uncompress $1  ;;
-            *.7z)        7z x $1    	;;
+            *.7z)        7z x $1        ;;
             *)           echo "'$1' cannot be uppacked via unpack()" ;;
         esac
     else
@@ -98,14 +98,14 @@ unpack () {
 pack () {
     if [ $1 ] ; then
         case $1 in
-            tbz)   	tar cjvf $2.tar.bz2 $2 		;;
-            tgz)   	tar czvf $2.tar.gz  $2 		;;
-            tar)  	tar cpvf $2.tar  $2     	;;
-			bz2)	bzip $2 					;;
-            gz)		gzip -c -9 -n $2 > $2.gz 	;;
-			zip)   	zip -r $2.zip $2  			;;
-            7z)    	7z a $2.7z $2    			;;
-            *)     	echo "'$1' cannot be packed via pack()" ;;
+            tbz)    tar cjvf $2.tar.bz2 $2      ;;
+            tgz)    tar czvf $2.tar.gz  $2      ;;
+            tar)    tar cpvf $2.tar  $2         ;;
+            bz2)    bzip $2                     ;;
+            gz)     gzip -c -9 -n $2 > $2.gz    ;;
+            zip)    zip -r $2.zip $2            ;;
+            7z)     7z a $2.7z $2               ;;
+            *)      echo "'$1' cannot be packed via pack()" ;;
         esac
     else
         echo "'$1' is not a valid file"
@@ -113,16 +113,39 @@ pack () {
 }
 
 display () {
+    if [ $2 ] ; then
+        case $2 in
+            best)   mode=1920x1080      ;;
+            good)   mode=1280x1024      ;;
+            bad)    mode=1024x768       ;;
+            *)      mode=$2             ;;
+        esac
+    else
+        mode=1024x768
+    fi
+
     if [ $1 ] ; then
         case $1 in
-            off)    xrandr --output eDP1 --auto --output VGA1 --off             ;;
-            good)   xrandr --output eDP1 --off --output VGA1 --mode 1280x1024   ;;
-            bad)    xrandr --output eDP1 --off --output VGA1 --mode 1024x768    ;;
-            *)      echo "$(gettext 'Display configurations:')"
-					echo -e "\t$(gettext 'off       xrandr --output eDP1 --auto --output VGA1 --off')"
-					echo -e "\t$(gettext 'good      xrandr --output eDP1 --off  --output VGA1 --mode 1280x1024')"
-					echo -e "\t$(gettext 'bas       xrandr --output eDP1 --off  --output VGA1 --mode 1024x768')"
-					;;
+            auto)       xrandr --output eDP1 --auto                                                     ;;
+            default)    xrandr --output eDP1 --auto         --output VGA1 --off                         ;;
+            native)     xrandr --output eDP1 --mode $mode   --output VGA1 --off                         ;;
+            external)   xrandr --output eDP1 --off          --output VGA1 --mode $mode                  ;;
+            mirror)     xrandr --output eDP1 --mode $mode   --output VGA1 --mode $mode --same-as eDP1   ;;
+            *)          echo "Unknown command: try $0 <command> [mode]"
+                        echo ""
+                        echo "Commands:"   
+                        echo -e "\tauto"   
+                        echo -e "\tdefault"   
+                        echo -e "\tnative"   
+                        echo -e "\texternal"   
+                        echo -e "\tmirror"   
+                        echo ""
+                        echo "Modes:"
+                        echo -e "\tbest - 1920x1080"   
+                        echo -e "\tgood - 1280x1024"   
+                        echo -e "\tbad  - 1024x768"   
+                        echo -e "\t<...>"   
+                        ;;
         esac
     else
         xrandr --output eDP1 --auto
