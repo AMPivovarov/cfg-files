@@ -17,3 +17,6 @@
 !.config/zsh/
 !.config/zsh/plugins
 !.config/zsh/plugins/**
+
+!.config/git/
+!.config/git/config
