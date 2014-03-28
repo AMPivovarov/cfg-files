@@ -1,5 +1,5 @@
 [color]
-	ui = auto
+	ui = true
 [user]
 	name = Aleksey Pivovarov
 	email = AMPivovarov@gmail.com
