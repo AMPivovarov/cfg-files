@@ -212,6 +212,9 @@ globalkeys = awful.util.table.join(
     awful.key({                   }, "XF86KbdBrightnessUp", function () awful.util.spawn("asus-kbd-backlight up") end),
     awful.key({                   }, "XF86KbdBrightnessDown", function () awful.util.spawn("asus-kbd-backlight down") end),
 
+    awful.key({                   }, "XF86TouchpadToggle", function () 
+        awful.util.spawn_with_shell("synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')") end),
+
     awful.key({ modkey,           }, "F12", function () awful.util.spawn("xautolock -locknow", false) end),
  
     awful.key({ modkey,           }, "p", function () notify_history.show_history(5) end),
