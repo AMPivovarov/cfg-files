@@ -5,3 +5,5 @@
 	email = AMPivovarov@gmail.com
 [alias]
 	s = status -sb
+[push]
+	default = simple
