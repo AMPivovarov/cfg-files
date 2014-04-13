@@ -144,6 +144,9 @@ clientbuttons = awful.util.table.join(
     awful.button({ modkey },  1, awful.mouse.client.move),
     awful.button({ modkey },  3, awful.mouse.client.resize))
 
+local function notify(title, text)
+    naughty.notify({ title = title, text = text, timeout = 1 })
+end
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
@@ -201,20 +204,32 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
-    
-    -- Standard program
-    
+        
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
-    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
-    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
-    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
+    awful.key({ modkey, "Shift"   }, "h",     function () 
+                                                  awful.tag.incnmaster( 1)      
+                                                  notify("Master", tostring(awful.tag.getnmaster()))
+                                              end),
+    awful.key({ modkey, "Shift"   }, "l",     function () 
+                                                  awful.tag.incnmaster(-1)      
+                                                  notify("Master", tostring(awful.tag.getnmaster()))
+                                              end),
+    awful.key({ modkey, "Control" }, "h",     function () 
+                                                  awful.tag.incncol( 1)
+                                                  notify("Columns", tostring(awful.tag.getncol()))
+                                              end),
+    awful.key({ modkey, "Control" }, "l",     function () 
+                                                  awful.tag.incncol(-1)         
+                                                  notify("Columns", tostring(awful.tag.getncol()))
+                                              end),
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
+    -- Standard program
+    
     awful.key({                   }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 15") end),
     awful.key({                   }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight -inc 15") end),
     awful.key({         "Shift"   }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 5") end),
@@ -232,9 +247,8 @@ globalkeys = awful.util.table.join(
 )
 
 clientkeys = awful.util.table.join(
-    awful.key({ modkey, "Shift"   }, "e",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ modkey,           }, "w",      function (c) c:kill()                         end),
-    
+    awful.key({ modkey, "Shift"   }, "e",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ modkey,           }, "e",
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
