@@ -147,6 +147,16 @@ clientbuttons = awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
+    awful.key({ modkey, "Control" }, "Up",      function() awful.client.moveresize(0, -20, 0, 0) end),
+    awful.key({ modkey, "Control" }, "Down",    function() awful.client.moveresize(0, 20, 0, 0) end),
+    awful.key({ modkey, "Control" }, "Left",    function() awful.client.moveresize(-20, 0, 0, 0) end),
+    awful.key({ modkey, "Control" }, "Right",   function() awful.client.moveresize(20, 0, 0, 0) end),
+
+    awful.key({ modkey, "Shift"   }, "Up",      function() awful.client.moveresize(0, 0, 0, -20) end),
+    awful.key({ modkey, "Shift"   }, "Down",    function() awful.client.moveresize(0, 0, 0, 20) end),
+    awful.key({ modkey, "Shift"   }, "Right",   function() awful.client.moveresize(0, 0, 20, 0) end),
+    awful.key({ modkey, "Shift"   }, "Left",    function() awful.client.moveresize(0, 0, -20, 0) end),
+
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
