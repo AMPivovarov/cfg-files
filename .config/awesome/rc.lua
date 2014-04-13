@@ -144,8 +144,8 @@ clientbuttons = awful.util.table.join(
     awful.button({ modkey },  1, awful.mouse.client.move),
     awful.button({ modkey },  3, awful.mouse.client.resize))
 
-local function notify(title, text)
-    naughty.notify({ title = title, text = text, timeout = 1 })
+local function notify_status(title, text)
+    naughty.notify({ title = title, text = text, timeout = 1, notification_history_ignore = true })
 end
 
 -- {{{ Key bindings
@@ -209,19 +209,19 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
     awful.key({ modkey, "Shift"   }, "h",     function () 
                                                   awful.tag.incnmaster( 1)      
-                                                  notify("Master", tostring(awful.tag.getnmaster()))
+                                                  notify_status("Master", tostring(awful.tag.getnmaster()))
                                               end),
     awful.key({ modkey, "Shift"   }, "l",     function () 
                                                   awful.tag.incnmaster(-1)      
-                                                  notify("Master", tostring(awful.tag.getnmaster()))
+                                                  notify_status("Master", tostring(awful.tag.getnmaster()))
                                               end),
     awful.key({ modkey, "Control" }, "h",     function () 
                                                   awful.tag.incncol( 1)
-                                                  notify("Columns", tostring(awful.tag.getncol()))
+                                                  notify_status("Columns", tostring(awful.tag.getncol()))
                                               end),
     awful.key({ modkey, "Control" }, "l",     function () 
                                                   awful.tag.incncol(-1)         
-                                                  notify("Columns", tostring(awful.tag.getncol()))
+                                                  notify_status("Columns", tostring(awful.tag.getncol()))
                                               end),
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
