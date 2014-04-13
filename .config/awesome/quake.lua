@@ -29,6 +29,7 @@
 local setmetatable = setmetatable
 local string = string
 local awful  = require("awful")
+local math  = require("math")
 local capi   = { mouse = mouse,
        screen = screen,
        client = client,
@@ -90,7 +91,7 @@ function QuakeConsole:display()
 
    -- Resize
    awful.client.floating.set(client, true)
-   client.border_width = 0
+   client.border_width = self.border_width
    client.size_hints_honor = false
    client:geometry({ x = x, y = y, width = width, height = height })
 
@@ -129,6 +130,7 @@ function QuakeConsole:new(config)
    config.width    = config.width    or 1        -- width
    config.vert     = config.vert     or "top"          -- top, bottom or center
    config.horiz    = config.horiz    or "center"       -- left, right or center
+   config.border_width  = config.border_width or 0 -- Initially, no border
 
    config.screen   = config.screen or capi.mouse.screen
    config.visible  = config.visible or false -- Initially, not visible
@@ -161,6 +163,17 @@ end
 -- Toggle the console
 function QuakeConsole:toggle()
    self.visible = not self.visible
+   self:display()
+end
+
+-- Change window height
+function QuakeConsole:raise()
+   self.height = math.min(self.height + 0.1, 1.0)
+   self:display()
+end
+
+function QuakeConsole:shrink()
+   self.height = math.max(self.height - 0.1, 0.1)
    self:display()
 end
 

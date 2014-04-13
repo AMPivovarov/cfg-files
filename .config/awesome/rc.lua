@@ -292,11 +292,14 @@ for s = 1, screen.count() do
     quakeconsole[s] = quake({ terminal = terminal,
                               name = "QuakeConsole",
                               height = 0.4,
+                              border_width = beautiful.border_width,
                               screen = s })
 end
 
 globalkeys = awful.util.table.join( globalkeys,
-    awful.key({ modkey,           }, "`",      function () quakeconsole[mouse.screen]:toggle()    end)
+    awful.key({ modkey,           }, "`",      function () quakeconsole[mouse.screen]:toggle()    end),
+    awful.key({ modkey, "Shift"   }, "`",      function () quakeconsole[mouse.screen]:raise()    end),
+    awful.key({ modkey, "Control" }, "`",      function () quakeconsole[mouse.screen]:shrink()    end)
 )
 -- }}}
 
