@@ -243,7 +243,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "F12", function () awful.util.spawn("xautolock -locknow", false) end),
  
     awful.key({ modkey,           }, "p", function () notify_history.show_history(5) end),
-    awful.key({ modkey, "Shift"   }, "p", function () notify_history.show_history(15) end)
+    awful.key({ modkey, "Shift"   }, "p", function () notify_history.show_history(15) end),
+    awful.key({ modkey, "Control" }, "p", function () notify_history.clear_history() end)
 )
 
 clientkeys = awful.util.table.join(

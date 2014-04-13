@@ -12,6 +12,10 @@ function module.show_history(num)
     end
 end
 
+function module.clear_history(num)
+	module.items = {}
+end
+
 local function update_notifications(data)
     -- Do not process same message twice
     if data.notification_history_ignore then return end
