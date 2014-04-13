@@ -285,6 +285,21 @@ for i = 1, keynumber do
                   end))
 end
 
+-- {{{ Quake console
+local quake = require("quake")
+local quakeconsole = {}
+for s = 1, screen.count() do
+    quakeconsole[s] = quake({ terminal = terminal,
+                              name = "QuakeConsole",
+                              height = 0.4,
+                              screen = s })
+end
+
+globalkeys = awful.util.table.join( globalkeys,
+    awful.key({ modkey,           }, "`",      function () quakeconsole[mouse.screen]:toggle()    end)
+)
+-- }}}
+
 -- Set keys
 root.keys(globalkeys)
 -- }}}
