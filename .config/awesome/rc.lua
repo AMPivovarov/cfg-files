@@ -11,8 +11,6 @@ local vicious = require("vicious")
 
 -- Notification library
 local naughty = require('naughty')
--- Notifications history
-local notify_history = require("notify_history")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
@@ -145,7 +143,7 @@ clientbuttons = awful.util.table.join(
     awful.button({ modkey },  3, awful.mouse.client.resize))
 
 local function notify_status(title, text)
-    naughty.notify({ title = title, text = text, timeout = 1, notification_history_ignore = true })
+    naughty.notify({ title = title, text = text, timeout = 1 })
 end
 
 -- {{{ Key bindings
@@ -240,11 +238,7 @@ globalkeys = awful.util.table.join(
     awful.key({                   }, "XF86TouchpadToggle", function () 
         awful.util.spawn_with_shell("synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')") end),
 
-    awful.key({ modkey,           }, "F12", function () awful.util.spawn("xautolock -locknow", false) end),
- 
-    awful.key({ modkey,           }, "p", function () notify_history.show_history(5) end),
-    awful.key({ modkey, "Shift"   }, "p", function () notify_history.show_history(15) end),
-    awful.key({ modkey, "Control" }, "p", function () notify_history.clear_history() end)
+    awful.key({ modkey,           }, "F12", function () awful.util.spawn("xautolock -locknow", false) end)
 )
 
 clientkeys = awful.util.table.join(
