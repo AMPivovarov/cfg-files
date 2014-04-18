@@ -11,8 +11,13 @@
 !.dynamic-colors/**
 
 !.config
+
 !.config/awesome/
 !.config/awesome/**
+
+!.config/dwb/
+!.config/dwb/keys
+!.config/dwb/settings
 
 !.config/zsh/
 !.config/zsh/plugins

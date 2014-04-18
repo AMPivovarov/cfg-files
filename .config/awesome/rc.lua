@@ -163,6 +163,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
     awful.key({ modkey, "Shift"   }, "Return", function () exec(terminal) end),
+    awful.key({ modkey,           }, "a", function () exec("dwb") end),
+
     awful.key({ modkey, "Shift"   }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -345,6 +347,8 @@ awful.rules.rules = {
     { rule = { class = "Chromium" },
       properties = { tag = tags[1][3] } },
     { rule = { class = "Opera" },
+      properties = { tag = tags[1][3] } },
+    { rule = { class = "Dwb" },
       properties = { tag = tags[1][3] } },
     { rule = { class = "Skype" },
       properties = { tag = tags[1][7] } },
