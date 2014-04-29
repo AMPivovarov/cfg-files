@@ -3,7 +3,6 @@ ZSH_PLUGINS=$ZSH/plugins
 
 source /etc/profile
 source $ZSH/.zsh_colors
-source $ZSH/.hostname
 
 
 alias zkbd='zsh /usr/share/zsh/functions/Misc/zkbd'
@@ -42,10 +41,10 @@ promptinit
 colors
 
 
-if [ $HOST = "$ZSH_HOST" ] ; then
-    PROMPT="${fg_lred}%n${fg_default}:${fg_blue}%~${fg_default}$ "
-else
+if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]] ; then
     PROMPT="${fg_lred}%n${fg_default}@${fg_green}%m${fg_default}:${fg_blue}%~${fg_default}$ "
+else
+    PROMPT="${fg_lred}%n${fg_default}:${fg_blue}%~${fg_default}$ "
 fi
 
 
