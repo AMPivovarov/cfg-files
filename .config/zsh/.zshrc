@@ -79,6 +79,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 alias ll='ls -lah'
+alias l='ls -lh'
 alias s='subl'
 alias pacman='yaourt'
 alias poweroff='systemctl poweroff'
