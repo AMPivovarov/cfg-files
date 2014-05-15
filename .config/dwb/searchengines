@@ -1,0 +1,5 @@
+wp https://en.wikipedia.org/w/index.php?search=_dwb_search_submit_&title=Special:Search
+aw https://wiki.archlinux.org/index.php?title=Special:Search&search=_dwb_search_submit_
+d https://duckduckgo.com/?q=_dwb_search_submit_
+g http://www.google.ru/search?lr=lang_en&q=_dwb_search_submit_
+y http://yandex.ru/yandsearch?text=_dwb_search_submit_
