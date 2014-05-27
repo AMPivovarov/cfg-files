@@ -73,6 +73,7 @@ mywibox     = {}
 promptbox = {}
 layoutbox = {}
 taglist   = {}
+tasklist   = {}
 taglist.buttons = awful.util.table.join(
                     awful.button({ },         1, awful.tag.viewonly),
                     awful.button({ modkey },  1, awful.client.movetotag),
@@ -95,6 +96,8 @@ for s = 1, screen.count() do
                         ))
     -- Create a taglist widget
     taglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist.buttons)
+
+    tasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, {})
 
     -- Create the wibox
     -- wibox[s] = awful.wibox({ position = "top", screen = s })
@@ -123,6 +126,7 @@ for s = 1, screen.count() do
 
     local wibox_layout = wibox.layout.align.horizontal()
     wibox_layout:set_left(left_wibox)
+    wibox_layout:set_middle(tasklist[s])
     wibox_layout:set_right(right_wibox)
 
     mywibox[s]:set_widget(wibox_layout)

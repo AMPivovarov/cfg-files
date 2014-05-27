@@ -23,6 +23,10 @@ theme.fg_urgent = "#CC9393"
 theme.bg_normal = "#3F3F3F"
 theme.bg_focus  = "#1E2320"
 theme.bg_urgent = theme.bg_normal
+
+theme.fg_focus_light = "#F0DFAF"
+theme.bg_focus_light = "#2C2C2C"
+
 -- }}}
 
 -- {{{ Borders
@@ -44,7 +48,8 @@ theme.titlebar_bg_normal = theme.bg_normal
 -- titlebar_[normal|focus]
 -- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
 -- Example:
---theme.taglist_bg_focus = "#CC9393"
+theme.tasklist_bg_focus = theme.bg_focus_light
+theme.tasklist_fg_focus = theme.fg_focus_light
 -- }}}
 
 -- {{{ Widgets
