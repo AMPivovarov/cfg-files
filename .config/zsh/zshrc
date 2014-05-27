@@ -91,6 +91,7 @@ alias egrep='egrep --color=auto'
 
 alias ll='ls -lah'
 alias l='ls -lh'
+alias g='git'
 alias s='subl'
 alias pacman='yaourt'
 alias poweroff='systemctl poweroff'
