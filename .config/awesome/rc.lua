@@ -97,7 +97,7 @@ for s = 1, screen.count() do
     -- Create a taglist widget
     taglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist.buttons)
 
-    tasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, {})
+    tasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags)
 
     -- Create the wibox
     -- wibox[s] = awful.wibox({ position = "top", screen = s })
@@ -390,4 +390,27 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+for s = 1, screen.count() do screen[s]:connect_signal("arrange", function ()
+    local clients = awful.client.visible(s)
+    local layout  = awful.layout.getname(awful.layout.get(s))
+
+    if #clients > 0 then -- Fine grained borders and floaters control
+        for _, c in pairs(clients) do
+            if c.maximized then
+                -- No borders with only one visible client
+                c.border_width = 0
+            elseif awful.client.floating.get(c) or layout == "floating" then
+                -- Floaters always have borders
+                c.border_width = beautiful.border_width
+            elseif #clients == 1 or layout == "max" then
+                -- No borders with only one visible client
+                c.border_width = 0
+            else
+                c.border_width = beautiful.border_width
+            end
+        end
+    end
+  end)
+end
 -- }}}

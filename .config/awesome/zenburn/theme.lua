@@ -146,4 +146,9 @@ theme.titlebar_maximized_button_normal_inactive = theme.confdir .. "/icons/title
 -- }}}
 -- }}}
 
+-- theme.tasklist_disable_icon = true
+theme.tasklist_floating = ""
+theme.tasklist_maximized_horizontal = ""
+theme.tasklist_maximized_vertical = ""
+
 return theme
