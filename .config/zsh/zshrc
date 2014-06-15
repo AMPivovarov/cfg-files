@@ -77,11 +77,11 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:
 eval `dircolors ~/.dir_colors`
 
 export EDITOR='vim'
-if [[ -f '/bin/vimpager' ]] ; then
-	export PAGER='/bin/vimpager'
-	alias less=$PAGER
-	alias zless=$PAGER
-fi
+#if [[ -f '/bin/vimpager' ]] ; then
+#	export PAGER='/bin/vimpager'
+#	alias less=$PAGER
+#	alias zless=$PAGER
+#fi
 
 alias ls='ls --color=auto'
 alias dir='dir --color=auto'
