@@ -2,6 +2,7 @@
 !.gitignore
 !.dir_colors
 !.xinitrc.awesome
+!.xinitrc.xfce
 !.Xresources
 !.zsh_colors
 !.zshrc

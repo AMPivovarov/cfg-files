@@ -10,5 +10,5 @@ if [ -s ~/.Xmodmap ]; then
 	xmodmap ~/.Xmodmap
 fi
 
-# exec awesome --no-argb &> /tmp/awesome.log
-exec awesome --no-argb
+# exec startxfce4 &> /tmp/awesome.log
+exec startxfce4
