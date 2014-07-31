@@ -356,7 +356,7 @@ awful.rules.rules = {
       properties = { tag = tags[1][3] } },
     { rule = { class = "Skype" },
       properties = { tag = tags[1][7] } },
-    { rule = { class = "sublime-text" },
+    { rule = { class = "sublime-text" }, except = { type = "dialog" },
       properties = { tag = tags[1][2] } }
 }
 -- }}}
