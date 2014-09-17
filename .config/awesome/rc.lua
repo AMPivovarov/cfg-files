@@ -168,6 +168,7 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey, "Shift"   }, "Return", function () exec(terminal) end),
     awful.key({ modkey,           }, "a", function () exec("google-chrome") end),
+    awful.key({ modkey, "Shift"   }, "a", function () exec("opera") end),
     awful.key({ modkey,           }, "s", function () exec("subl") end),
 
     awful.key({ modkey, "Shift"   }, "r", awesome.restart),
