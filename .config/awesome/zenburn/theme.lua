@@ -9,9 +9,9 @@
 -- {{{ Main
 theme = {}
 theme.confdir = awful.util.getdir("config")
-theme.zenburn_dir = awful.util.getdir("config") .. "/themes/zenburn"
-theme.default_dir = awful.util.getdir("config") .. "/themes/default"
-theme.wallpaper = { theme.zenburn_dir .. "/zenburn-background.png" }
+theme.zenburn_dir = awful.util.getdir("config") .. "/zenburn"
+-- theme.wallpaper = { theme.zenburn_dir .. "/zenburn-background.png" }
+theme.wallpaper_cmd = { "hsetroot -solid '#131313'" }
 -- }}}
 
 -- {{{ Styles
@@ -88,8 +88,8 @@ theme.taglist_squares_unsel = theme.confdir .. "/icons/taglist/squarez.png"
 
 -- {{{ Misc
 theme.awesome_icon           = theme.confdir .. "/icons/awesome-icon.png"
-theme.menu_submenu_icon      = theme.default_dir .. "/submenu.png"
-theme.tasklist_floating_icon = theme.default_dir .. "/tasklist/floatingw.png"
+theme.menu_submenu_icon      = theme.zenburn_dir .. "/submenu.png"
+theme.tasklist_floating_icon = theme.zenburn_dir .. "/layouts/floatingw.png"
 -- }}}
 
 -- {{{ Layout
