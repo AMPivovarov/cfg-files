@@ -168,6 +168,7 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey, "Shift"   }, "Return", function () exec(terminal) end),
     awful.key({ modkey,           }, "a", function () exec("google-chrome") end),
+    awful.key({ modkey,           }, "s", function () exec("subl") end),
 
     awful.key({ modkey, "Shift"   }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
@@ -358,10 +359,13 @@ awful.rules.rules = {
       properties = { tag = tags[1][3] } },
     { rule = { class = "Skype" },
       properties = { tag = tags[1][7] } },
+    { rule = { class = "Thunderbird" },
+      properties = { tag = tags[1][7] } },
     { rule = { class = "sublime-text" }, except = { type = "dialog" },
       properties = { tag = tags[1][2] } },
     { rule = { class = "Sublime_text" }, except = { type = "dialog" },
       properties = { tag = tags[1][2] } }
+
 }
 -- }}}
 
