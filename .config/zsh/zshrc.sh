@@ -10,7 +10,7 @@ source $ZSH/alias.sh
 eval `dircolors ~/.dir_colors`
 
 
-fpath=($ZSH_PLUGINS/completions $fpath)
+fpath=($ZSH_PLUGINS/completions $ZSH_PLUGINS/zsh-completions/src $fpath)
 export PATH="$PATH:$HOME/.bin"
 export EDITOR='vim'
 
@@ -21,6 +21,7 @@ export DYNAMIC_COLORS_ROOT=$ZSH_PLUGINS/dynamic-colors
 export PATH="$PATH:$DYNAMIC_COLORS_ROOT/bin"
 source $ZSH_PLUGINS/dynamic-colors/completions/dynamic-colors.zsh
 
+source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 autoload -U compinit promptinit colors
 compinit

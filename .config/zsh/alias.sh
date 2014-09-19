@@ -9,10 +9,11 @@ alias ll='ls -lah'
 alias l='ls -lh'
 alias g='git'
 alias s='subl'
-alias yacman='yaourt'
 
 alias memleak='valgrind --leak-check=yes'
 alias open='xdg-open'
+
+alias pacman='yaourt'
 
 if hash netctl 2>/dev/null; then
 	alias wlan='sudo netctl'
