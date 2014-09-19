@@ -24,7 +24,7 @@
 !.config/zsh/
 !.config/zsh/zsh_colors
 !.config/zsh/.zshrc
-!.config/zsh/zshrc
+!.config/zsh/*.sh
 !.config/zsh/plugins
 !.config/zsh/plugins/**
 
