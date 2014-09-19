@@ -10,14 +10,20 @@ alias l='ls -lh'
 alias g='git'
 alias s='subl'
 alias yacman='yaourt'
-alias poweroff='systemctl poweroff'
-alias reboot='systemctl reboot'
+
 alias memleak='valgrind --leak-check=yes'
 alias open='xdg-open'
-alias wlan='sudo netctl'
 
-alias start_vm='setsid VBoxHeadless --startvm Kernel 1>~/.stdout 2>~/.stderr &'
-alias stop_vm='VBoxManage controlvm Kernel poweroff'
+if hash netctl 2>/dev/null; then
+	alias wlan='sudo netctl'
+fi
+if hash systemctl 2>/dev/null; then
+	alias poweroff='systemctl poweroff'
+	alias reboot='systemctl reboot'
+fi
+
+# alias start_vm='setsid VBoxHeadless --startvm Kernel 1>~/.stdout 2>~/.stderr &'
+# alias stop_vm='VBoxManage controlvm Kernel poweroff'
 
 alias ...='cd ../..'
 alias ....='cd ../../..'
