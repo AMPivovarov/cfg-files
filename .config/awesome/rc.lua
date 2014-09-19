@@ -167,7 +167,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
     awful.key({ modkey, "Shift"   }, "Return", function () exec(terminal) end),
-    awful.key({ modkey,           }, "a", function () exec("google-chrome") end),
+    awful.key({ modkey,           }, "a", function () exec("google-chrome-stable") end),
     awful.key({ modkey, "Shift"   }, "a", function () exec("opera") end),
     awful.key({ modkey,           }, "s", function () exec("subl") end),
 
