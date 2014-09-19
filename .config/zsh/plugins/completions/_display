@@ -1,3 +1,5 @@
 #compdef display
 
-_arguments "1: :(auto default native external mirror)" "2: :(best good bad)" 
+_arguments \
+	"1: :(auto default native external mirror)" \
+	"2: :(best good bad)"
