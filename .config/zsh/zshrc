@@ -2,12 +2,12 @@ ZSH=$HOME/.config/zsh
 ZSH_PLUGINS=$ZSH/plugins
 
 source /etc/profile
-source $ZSH/.zsh_colors
+source $ZSH/zsh_colors
 
 
 # ==== ZKBD ====
 
-ZKBD=$ZSH/.zkbd
+ZKBD=$ZSH/zkbd
 alias zkbd='zsh /usr/share/zsh/functions/Misc/zkbd'
 autoload zkbd
 [[ ! -d $ZKBD ]] && mkdir $ZKBD

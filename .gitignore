@@ -22,7 +22,7 @@
 !.config/dwb/searchengines
 
 !.config/zsh/
-!.config/zsh/.zsh_colors
+!.config/zsh/zsh_colors
 !.config/zsh/.zshrc
 !.config/zsh/zshrc
 !.config/zsh/plugins
