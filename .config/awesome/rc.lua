@@ -363,7 +363,26 @@ globalkeys = awful.util.table.join( globalkeys,
 root.keys(globalkeys)
 -- }}}
 
+
 -- {{{ Rules
+local function tag_rule(class, tag, ignore_dialogs )
+    ignore_dialogs = ignore_dialogs or false
+    result = {}
+    result.rule = { class = class }
+    result.properties = { tag = tag }
+    if ignore_dialogs then
+        result.except = { type = "dialog " }
+    end
+    return result
+end
+
+local function floating_rule(class)
+    result = {}
+    result.rule = { class = class }
+    result.properties = { floating = true }
+    return result
+end
+
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
@@ -373,29 +392,19 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      size_hints_honor = false } },
-    { rule = { class = "MPlayer" },
-      properties = { floating = true } },
-    { rule = { class = "pinentry" },
-      properties = { floating = true } },
-    { rule = { class = "gimp" },
-      properties = { floating = true } },
-    { rule = { class = "Chromium" }, except = { type = "dialog" },
-      properties = { tag = tags[1][3] } },
-    { rule = { class = "Google-chrome" }, except = { type = "dialog" },
-      properties = { tag = tags[1][3] } },
-    { rule = { class = "Opera" }, except = { type = "dialog" },
-      properties = { tag = tags[1][3] } },
-    { rule = { class = "Dwb" },
-      properties = { tag = tags[1][3] } },
-    { rule = { class = "Skype" },
-      properties = { tag = tags[1][7] } },
-    { rule = { class = "Thunderbird" }, except = { type = "dialog" },
-      properties = { tag = tags[1][7] } },
-    { rule = { class = "sublime-text" }, except = { type = "dialog" },
-      properties = { tag = tags[1][2] } },
-    { rule = { class = "Sublime_text" }, except = { type = "dialog" },
-      properties = { tag = tags[1][2] } }
+    
+    floating_rule( "MPlayer"    ),
+    floating_rule( "pinentry"   ),
+    floating_rule( "gimp"       ),
 
+    tag_rule( "Chromium",       tags[1][3], true ),
+    tag_rule( "Google-chrome",  tags[1][3], true ),
+    tag_rule( "Opera",          tags[1][3], true ),
+    tag_rule( "Dwb",            tags[1][3], true ),
+    tag_rule( "Skype",          tags[1][7]       ),
+    tag_rule( "Thunderbird",    tags[1][7], true ),
+    tag_rule( "sublime-text",   tags[1][2], true ),
+    tag_rule( "Sublime-text",   tags[1][2], true ),
 }
 -- }}}
 
