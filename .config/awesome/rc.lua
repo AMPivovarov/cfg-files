@@ -371,7 +371,7 @@ local function tag_rule(class, tag, ignore_dialogs )
     result.rule = { class = class }
     result.properties = { tag = tag }
     if ignore_dialogs then
-        result.except = { type = "dialog " }
+        result.except = { type = "dialog" }
     end
     return result
 end
