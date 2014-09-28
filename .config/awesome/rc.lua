@@ -186,10 +186,10 @@ globalkeys = awful.util.table.join(
         end),
 
     awful.key({ modkey,               }, "Escape",  
-    	function ()
+        function ()
             awful.client.focus.history.previous()
             if client.focus then client.focus:raise() end
-    	end),
+        end),
     awful.key({ modkey,         shift }, "Escape",  awful.tag.history.restore),
 
     awful.key({ modkey,         shift }, "Return",  function () exec(terminal) end),
@@ -203,6 +203,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,               }, "z",       function () promptbox[mouse.screen]:run() end),
 
     awful.key({                       }, "Print",   function () exec("scrot -e 'mv $f ~/ 2>/dev/null'") notify_status("Screen captured") end),
+    awful.key({                 shift }, "Print",   function () sexec("sleep 1 && scrot -e 'mv $f ~/ 2>/dev/null'") notify_status("Screen captured") end),
 
     awful.key({ modkey,               }, "Tab",
         function ()
@@ -411,6 +412,7 @@ awful.rules.rules = {
     tag_rule( "sublime-text",          tags[1][2], true ),
     tag_rule( "Sublime-text",          tags[1][2], true ),
     tag_rule( "Sublime_text",          tags[1][2], true ),
+    tag_rule( "Subl",                  tags[1][2], true ),
 }
 -- }}}
 
