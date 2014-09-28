@@ -185,7 +185,12 @@ globalkeys = awful.util.table.join(
             end
         end),
 
-    awful.key({ modkey,               }, "Escape",  awful.tag.history.restore),
+    awful.key({ modkey,               }, "Escape",  
+    	function ()
+            awful.client.focus.history.previous()
+            if client.focus then client.focus:raise() end
+    	end),
+    awful.key({ modkey,         shift }, "Escape",  awful.tag.history.restore),
 
     awful.key({ modkey,         shift }, "Return",  function () exec(terminal) end),
     awful.key({ modkey,               }, "a",       function () exec("google-chrome-stable") end),
@@ -201,10 +206,9 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey,               }, "Tab",
         function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
+            -- awful.client.focus.history.previous()
+            awful.client.focus.byidx(-1)
+            if client.focus then client.focus:raise() end
         end),
     awful.key({ modkey,         shift }, "Tab",
         function ()
@@ -263,19 +267,19 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
 
-    awful.key({                       }, "XF86MonBrightnessDown",   function () awful.util.spawn("xbacklight -dec 15") end),
-    awful.key({                       }, "XF86MonBrightnessUp",     function () awful.util.spawn("xbacklight -inc 15") end),
-    awful.key({                 shift }, "XF86MonBrightnessDown",   function () awful.util.spawn("xbacklight -dec 5") end),
-    awful.key({                 shift }, "XF86MonBrightnessUp",     function () awful.util.spawn("xbacklight -inc 5") end),
-    awful.key({                       }, "XF86KbdBrightnessUp",     function () awful.util.spawn("asus-kbd-backlight up") end),
-    awful.key({                       }, "XF86KbdBrightnessDown",   function () awful.util.spawn("asus-kbd-backlight down") end),
+    awful.key({                       }, "XF86MonBrightnessDown",   function () exec("xbacklight -dec 15") end),
+    awful.key({                       }, "XF86MonBrightnessUp",     function () exec("xbacklight -inc 15") end),
+    awful.key({                 shift }, "XF86MonBrightnessDown",   function () exec("xbacklight -dec 5") end),
+    awful.key({                 shift }, "XF86MonBrightnessUp",     function () exec("xbacklight -inc 5") end),
+    awful.key({                       }, "XF86KbdBrightnessUp",     function () exec("asus-kbd-backlight up") end),
+    awful.key({                       }, "XF86KbdBrightnessDown",   function () exec("asus-kbd-backlight down") end),
 
     awful.key({                       }, "XF86TouchpadToggle",      
         function () 
-            awful.util.spawn_with_shell("synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')") 
+            sexec("synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')") 
         end),
 
-    awful.key({ modkey,               }, "F12",     function () awful.util.spawn("xautolock -locknow", false) end)
+    awful.key({ modkey,               }, "F12",     function () exec("xautolock -locknow", false) end)
 )
 
 clientkeys = awful.util.table.join(
