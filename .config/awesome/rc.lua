@@ -413,6 +413,8 @@ awful.rules.rules = {
     tag_rule( "Sublime-text",          tags[1][2], true ),
     tag_rule( "Sublime_text",          tags[1][2], true ),
     tag_rule( "Subl",                  tags[1][2], true ),
+    tag_rule( "jetbrains-idea",        tags[1][2], true ),
+    tag_rule( "jetbrains-idea-debug",  tags[1][1], true ),
 }
 -- }}}
 
