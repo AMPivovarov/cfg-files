@@ -28,6 +28,7 @@ beautiful.init(awful.util.getdir("config") .. "/zenburn/theme.lua")
 modkey = "Mod4"
 shift  = "Shift"
 ctrl   = "Control"
+alt    = "Mod1"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
@@ -202,8 +203,10 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey,               }, "z",       function () promptbox[mouse.screen]:run() end),
 
-    awful.key({                       }, "Print",   function () exec("scrot -e 'mv $f ~/ 2>/dev/null'") notify_status("Screen captured") end),
-    awful.key({                 shift }, "Print",   function () sexec("scrot -d 1 -e 'mv $f ~/ 2>/dev/null'") notify_status("Screen captured") end),
+    awful.key({                       }, "Print",   function () exec ("scrot         -e 'mv $f ~/ 2>/dev/null'") notify_status("Screen captured") end),
+    awful.key({                 shift }, "Print",   function () sexec("scrot    -d 1 -e 'mv $f ~/ 2>/dev/null'") notify_status("Screen captured") end),
+    awful.key({ alt   ,               }, "Print",   function () exec ("scrot -u      -e 'mv $f ~/ 2>/dev/null'") notify_status("Screen captured") end),
+    awful.key({ alt   ,         shift }, "Print",   function () sexec("scrot -u -d 1 -e 'mv $f ~/ 2>/dev/null'") notify_status("Screen captured") end),
 
     awful.key({ modkey,               }, "Tab",
         function ()
