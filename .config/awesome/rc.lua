@@ -203,7 +203,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,               }, "z",       function () promptbox[mouse.screen]:run() end),
 
     awful.key({                       }, "Print",   function () exec("scrot -e 'mv $f ~/ 2>/dev/null'") notify_status("Screen captured") end),
-    awful.key({                 shift }, "Print",   function () sexec("sleep 1 && scrot -e 'mv $f ~/ 2>/dev/null'") notify_status("Screen captured") end),
+    awful.key({                 shift }, "Print",   function () sexec("scrot -d 1 -e 'mv $f ~/ 2>/dev/null'") notify_status("Screen captured") end),
 
     awful.key({ modkey,               }, "Tab",
         function ()
