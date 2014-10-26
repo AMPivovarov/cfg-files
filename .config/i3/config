@@ -34,7 +34,6 @@ bindsym Alt+ Print                      exec "scrot-wrapper -u     "
 bindsym Alt+Shift+Print                 exec "scrot-wrapper -u -d 1"
 
 
-
 bindsym $mod+j                  focus left
 bindsym $mod+k                  focus down
 bindsym $mod+l                  focus up
@@ -72,6 +71,8 @@ bindsym $mod+p                  layout toggle split
 
 bindsym $mod+Shift+space        floating toggle
 bindsym $mod+space              focus mode_toggle
+
+bindsym $mod+Escape             workspace back_and_forth
 
 
 bindsym $mod+1                  workspace 1
@@ -119,6 +120,43 @@ mode "resize" {
 }
 
 
+set $background         #131313
+
+set $fg_normal          #DCDCCC
+set $fg_focus           #F0DFAF
+set $fg_urgent          #CC9393
+
+set $bg_normal          #3F3F3F
+set $bg_focus           #1E2320
+set $bg_urgent          #3F3F3F
+
+set $fg_focus_light     #F0DFAF
+set $bg_focus_light     #2C2C2C
+
+set $border_normal      #3F3F3F
+set $border_focus       #1E2320
+set $border_urgent      #CC9393
+
+
+# colors                        border          background      text            indicator
+client.focused                  $border_focus   $bg_focus       $fg_focus       $bg_focus
+client.unfocused                $border_normal  $bg_normal      $fg_normal      $bg_normal
+client.urgent                   $border_urgent  $bg_urgent      $fg_urgent      $bg_urgent
+#client.focused_inactive
+
+
 bar {
+        position top
         status_command i3status
+        colors {
+                statusline $fg_normal
+                background $background
+                #separator
+
+                # colors                border          background      text
+                focused_workspace       $border_focus   $bg_focus       $fg_focus
+                inactive_workspace      $border_normal  $bg_normal      $fg_normal
+                urgent_workspace        $border_urgent  $bg_urgent      $fg_urgent
+                #active_workspace
+        }
 }
