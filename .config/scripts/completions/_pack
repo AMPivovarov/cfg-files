@@ -2,4 +2,4 @@
 
 _arguments \
 	"1: :(tbz tgz tar bz2 gz zip 7z)" \
-	"*: :_files" 
+	"*: :_files"

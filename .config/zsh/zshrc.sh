@@ -1,5 +1,6 @@
 ZSH=$HOME/.config/zsh
 ZSH_PLUGINS=$ZSH/plugins
+SCRIPTS_DIR=$HOME/.config/scripts
 
 source /etc/profile
 source $ZSH/zsh_colors
@@ -10,12 +11,9 @@ source $ZSH/alias.sh
 eval `dircolors ~/.dir_colors`
 
 
-fpath=($ZSH_PLUGINS/completions $ZSH_PLUGINS/zsh-completions/src $fpath)
-export PATH="$PATH:$HOME/.bin"
+fpath=($SCRIPTS_DIR/completions $ZSH_PLUGINS/zsh-completions/src $fpath)
+export PATH="$PATH:$HOME/.bin/:$SCRIPTS_DIR"
 export EDITOR='vim'
-
-source $ZSH_PLUGINS/display.zsh
-source $ZSH_PLUGINS/pack.zsh
 
 export DYNAMIC_COLORS_ROOT=$ZSH_PLUGINS/dynamic-colors
 export PATH="$PATH:$DYNAMIC_COLORS_ROOT/bin"

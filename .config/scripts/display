@@ -1,0 +1,38 @@
+#!/bin/sh
+if [ $2 ] ; then
+    case $2 in
+        best)   mode=1920x1080      ;;
+        good)   mode=1280x1024      ;;
+        bad)    mode=1024x768       ;;
+        *)      mode=$2             ;;
+    esac
+else
+    mode=1024x768
+fi
+
+if [ $1 ] ; then
+    case $1 in
+        auto)       xrandr --output eDP1 --auto                                                     ;;
+        default)    xrandr --output eDP1 --auto         --output VGA1 --off                         ;;
+        native)     xrandr --output eDP1 --mode $mode   --output VGA1 --off                         ;;
+        external)   xrandr --output eDP1 --off          --output VGA1 --mode $mode                  ;;
+        mirror)     xrandr --output eDP1 --mode $mode   --output VGA1 --mode $mode --same-as eDP1   ;;
+        *)          echo "Unknown command: try $0 <command> [mode]"
+                    echo ""
+                    echo "Commands:"
+                    echo -e "\tauto"
+                    echo -e "\tdefault"
+                    echo -e "\tnative"
+                    echo -e "\texternal"
+                    echo -e "\tmirror"
+                    echo ""
+                    echo "Modes:"
+                    echo -e "\tbest - 1920x1080"
+                    echo -e "\tgood - 1280x1024"
+                    echo -e "\tbad  - 1024x768"
+                    echo -e "\t<...>"
+                    ;;
+    esac
+else
+    xrandr --output eDP1 --auto
+fi
