@@ -1,2 +1,2 @@
 #!/bin/sh
-scrot -e 'mv $f ~/ 2>/dev/null & notify-send -u low -t 1000 "Captured screen!" "$f"' "$@"
+scrot -e 'mv $f ~/ 2>/dev/null & notify-send -u low -t 1000 -a scrot "Captured screen!" "$f"' "$@"

@@ -21,6 +21,8 @@
 
 !.config/i3/
 !.config/i3/**
+!.config/dunst/
+!.config/dunst/**
 
 !.config/dwb/
 !.config/dwb/keys
