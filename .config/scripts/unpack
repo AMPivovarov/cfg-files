@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 if hash atool 2>/dev/null ; then
     aunpack "$@"
 else

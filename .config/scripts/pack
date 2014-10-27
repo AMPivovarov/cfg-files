@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 if hash atool 2>/dev/null; then
     if [[ -z "$1" || "$#" -eq 1 ]]; then
         echo "${0##*/} <type> [files] - pack common archive formats"
