@@ -10,7 +10,7 @@ floating_modifier $mod
 
 bindsym $mod+Return             exec i3-sensible-terminal
 bindsym $mod+w                  kill
-bindsym $mod+z                  exec --no-start-id dmenu_run
+bindsym $mod+z                  exec --no-startup-id dmenu_run
 
 
 bindsym $mod+a                  exec google-chrome-stable
@@ -149,13 +149,14 @@ client.unfocused                $border_normal  $bg_normal      $fg_normal      
 client.urgent                   $border_urgent  $bg_urgent      $fg_urgent      $bg_urgent
 #client.focused_inactive
 
-bindsym $mod+Shift+Return       bar mode toggle
+#bindsym $mod+Shift+Return       bar mode toggle
 
 bar {
         font pango:sans 8
 
         position top
-        mode dock
+        mode hide
+        modifier Mod1
 
         #status_command i3status
         status_command $HOME/.config/i3/conky-i3bar
