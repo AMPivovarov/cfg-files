@@ -149,14 +149,14 @@ client.unfocused                $border_normal  $bg_normal      $fg_normal      
 client.urgent                   $border_urgent  $bg_urgent      $fg_urgent      $bg_urgent
 #client.focused_inactive
 
-#bindsym $mod+Shift+Return       bar mode toggle
+bindsym $mod+Shift+Return       bar mode toggle
 
 bar {
         font pango:sans 8
 
         position top
         mode hide
-        modifier Mod1
+        modifier Mod3
 
         #status_command i3status
         status_command $HOME/.config/i3/conky-i3bar
