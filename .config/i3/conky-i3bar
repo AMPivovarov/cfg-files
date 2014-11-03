@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# i3bar accepts infinity json array as input
+
+echo '{"version":1}'
+
+echo '['
+
+echo '[]'
+
+exec conky -c $HOME/.config/i3/.conkyrc

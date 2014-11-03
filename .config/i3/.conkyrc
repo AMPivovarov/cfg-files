@@ -1,0 +1,24 @@
+own_window no
+out_to_x no
+out_to_console yes
+background no
+
+update_interval 5
+
+short_units yes
+use_spacer left
+
+if_up_strictness address
+cpu_avg_samples 2
+
+TEXT
+
+,[
+  {"name": "cpu", "color": "\#808080", "full_text":"CPU ${cpu cpu0}%"},
+
+  ${if_empty ${battery BAT0} } ${else}
+        {"name": "battery", "color": "\#808080", "full_text": "BAT ${battery_percent BAT0}%"}, 
+  ${endif} 
+  
+  {"name": "time", "color": "\#CFCFCF", "full_text": "${time %d-%m-%y %H:%M}"}
+ ]
