@@ -1,0 +1,11 @@
+#!/bin/sh
+
+xrdb -merge ~/.Xresources
+
+setxkbmap "us, ru" -option grp:caps_toggle,grp_led:caps
+
+urxvtd -q -f -o
+
+if [ -s ~/.Xmodmap ]; then
+	xmodmap ~/.Xmodmap
+fi
