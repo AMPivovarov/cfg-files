@@ -165,8 +165,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,  ctrl,  shift }, "Right",   function() awful.client.moveresize(0, 0, 20, 0) end),
     awful.key({ modkey,  ctrl,  shift }, "Left",    function() awful.client.moveresize(0, 0, -20, 0) end),
 
-    awful.key({ modkey,               }, "Left",    awful.tag.viewprev ),
-    awful.key({ modkey,               }, "Right",   awful.tag.viewnext ),
     awful.key({ modkey,         shift }, "Left",
         function()
             local curidx = awful.tag.getidx()
@@ -208,6 +206,19 @@ globalkeys = awful.util.table.join(
     awful.key({ alt   ,               }, "Print",   function () exec ("scrot-wrapper -u     ") end),
     awful.key({ alt   ,         shift }, "Print",   function () sexec("scrot-wrapper -u -d 1") end),
 
+
+    awful.key({ modkey,               }, "Left",    
+        function ()
+            -- awful.client.focus.history.previous()
+            awful.client.focus.byidx(-1)
+            if client.focus then client.focus:raise() end
+        end),
+    awful.key({ modkey,               }, "Right",   
+        function ()
+            awful.client.focus.byidx( 1)
+            if client.focus then client.focus:raise() end
+        end),
+
     awful.key({ modkey,               }, "Tab",
         function ()
             -- awful.client.focus.history.previous()
@@ -219,6 +230,7 @@ globalkeys = awful.util.table.join(
             awful.client.focus.byidx( 1)
             if client.focus then client.focus:raise() end
         end),
+
 
   -- Default
 
