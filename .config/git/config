@@ -6,5 +6,6 @@
 [alias]
 	s = status -sb
 	c = commit
+	graph = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 [push]
 	default = simple
