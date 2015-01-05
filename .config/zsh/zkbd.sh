@@ -16,8 +16,8 @@ bindkey -e
 [[ -n ${key[Left]}      ]]    && bindkey  "${key[Left]}"        backward-char
 [[ -n ${key[Right]}     ]]    && bindkey  "${key[Right]}"       forward-char
 [[ -n ${key[Backspace]} ]]    && bindkey  "${key[Backspace]}"   backward-delete-char
-[[ -n ${key[PageUp]}    ]]    && bindkey  "${key[PageUp]}"      up-line-or-history
-[[ -n ${key[PageDown]}  ]]    && bindkey  "${key[PageDown]}"    down-line-or-history
+[[ -n ${key[PageUp]}    ]]    && bindkey  "${key[PageUp]}"      history-beginning-search-backward
+[[ -n ${key[PageDown]}  ]]    && bindkey  "${key[PageDown]}"    history-beginning-search-forward
 
 # Codes not discovered by zkbd
 [[ -n ${key[CtrlLeft]}  ]]    && bindkey  "${key[CtrlLeft]}"    emacs-backward-word
