@@ -19,30 +19,29 @@ URxvt.font: xft:Source Code Pro:size=12
 !!URxvt.font: xft: Anonymous Pro-20
 URxvt.boldFont:
 URxvt.boldItalicFont:
-URxvt.perl-ext-common: default,clipboard
+
+URxvt.perl-ext-common: default,clipboard,tabbedex
 URxvt.modifier: mod4
-URxvt.scrollTtyOutput: true
-Urxvt.scrollWithBuffer: true
-Urxvt.scrollTtyKeypress: true
 Urxvt.saveLines: 5000
 
-!*.color0: #000000
-!*.color1: #ff5555
-!*.color2: #55ff55
-!*.color3: #aa5500
-!*.color4: #5555ff
-!*.color5: #ff55ff
-!*.color6: #00aaaa
-!*.color7: #aaaaaa
+URxvt.scrollTtyOutput: false
+Urxvt.scrollWithBuffer: false
+Urxvt.scrollTtyKeypress: true
 
-!*.color8: #555555
-!*.color9: #ff5555
-!*.color10: #55ff55
-!*.color11: #ffff55
-!*.color12: #5555ff
-!*.color13: #ff55ff
-!*.color14: #55ffff
-!*.color15: #ffffff
+URxvt.tabbed.tabbar-fg: 2
+URxvt.tabbed.tabbar-bg: 0
+URxvt.tabbed.tab-fg: 5
+URxvt.tabbed.tab-bg: 0
+URxvt.tabbed.autohide: true
+URXvt.tabbed.reopen-on-close: true
+URxvt.tabbed.no-tabbedex-keys: true
+URxvt.tabbed.title: false
+URxvt.keysym.C-S-Left: perl:tabbedex:move_tab_left
+URxvt.keysym.C-S-Right: perl:tabbedex:move_tab_right
+URxvt.keysym.S-Down: perl:tabbedex:new_tab
+URxvt.keysym.S-Right: perl:tabbedex:next_tab
+URxvt.keysym.S-Left: perl:tabbedex:prev_tab
+URxvt.keysym.S-Up: perl:tabbedex:rename_tab
 
 !! drop in Solarized colorscheme for Xresources/Xdefaults
 
