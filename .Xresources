@@ -22,11 +22,11 @@ URxvt.boldItalicFont:
 
 URxvt.perl-ext-common: default,clipboard,tabbedex
 URxvt.modifier: mod4
-Urxvt.saveLines: 12000
+URxvt.saveLines: 12000
 
 URxvt.scrollTtyOutput: false
-Urxvt.scrollWithBuffer: false
-Urxvt.scrollTtyKeypress: true
+URxvt.scrollWithBuffer: true
+URxvt.scrollTtyKeypress: true
 
 URxvt.tabbed.tabbar-fg: 2
 URxvt.tabbed.tabbar-bg: 0
