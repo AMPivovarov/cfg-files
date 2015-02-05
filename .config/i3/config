@@ -1,4 +1,5 @@
 set $mod Mod4
+set $alt Mod1
 
 #font pango:DejaVu Sans Mono 8
 font pango:sans 8
@@ -31,8 +32,8 @@ bindsym XF86TouchpadToggle              exec "synclient TouchpadOff=$(synclient 
 
 bindsym Print                           exec "scrot-wrapper        "
 bindsym Shift+Print                     exec "scrot-wrapper    -d 1"
-bindsym Alt+Print                       exec "scrot-wrapper -u     "
-bindsym Alt+Shift+Print                 exec "scrot-wrapper -u -d 1"
+bindsym $alt+Print                       exec "scrot-wrapper -u     "
+bindsym $alt+Shift+Print                 exec "scrot-wrapper -u -d 1"
 
 
 bindsym $mod+j                  focus left
