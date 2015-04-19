@@ -190,3 +190,13 @@ bar {
                 #active_workspace
         }
 }
+
+
+hide_edge_borders both
+workspace_layout stacking
+
+assign [class="Skype"] 9
+for_window [class="Skype"] floating disable
+
+assign [class="Google-chrome"] 3
+assign [class="Yandex-browser"] 3
