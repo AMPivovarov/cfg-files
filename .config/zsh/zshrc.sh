@@ -21,6 +21,8 @@ source $ZSH_PLUGINS/dynamic-colors/completions/dynamic-colors.zsh
 
 source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+source $ZSH_PLUGINS/fzf/key-bindings.zsh
+
 autoload -U compinit promptinit colors
 compinit
 promptinit
