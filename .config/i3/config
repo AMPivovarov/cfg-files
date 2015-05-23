@@ -12,7 +12,7 @@ floating_modifier $mod
 bindsym $mod+Return             exec urxvtc
 bindsym $mod+w                  kill
 bindsym $mod+z                  exec --no-startup-id "dmenu_run -i -f -nb \#3F3F3F -nf \#DCDCCC -sb \#1E2320 -sf \#F0DFAF"
-bindsym $mod+Tab 				exec --no-startup-id quickswitch.py -d "dmenu -b -i -f -l 20 -nb \#3F3F3F -nf \#DCDCCC -sb \#1E2320 -sf \#F0DFAF"
+bindsym $mod+Tab                exec --no-startup-id quickswitch.py -d "dmenu -b -i -f -l 20 -nb \#3F3F3F -nf \#DCDCCC -sb \#1E2320 -sf \#F0DFAF"
 
 
 bindsym $mod+a                  exec google-chrome-stable
@@ -32,8 +32,8 @@ bindsym XF86TouchpadToggle              exec "synclient TouchpadOff=$(synclient 
 
 bindsym Print                           exec "scrot-wrapper        "
 bindsym Shift+Print                     exec "scrot-wrapper    -d 1"
-bindsym $alt+Print                       exec "scrot-wrapper -u     "
-bindsym $alt+Shift+Print                 exec "scrot-wrapper -u -d 1"
+bindsym $alt+Print                      exec "scrot-wrapper -u     "
+bindsym $alt+Shift+Print                exec "scrot-wrapper -u -d 1"
 
 
 bindsym $mod+j                  focus left
@@ -79,7 +79,7 @@ bindsym $mod+Escape             workspace back_and_forth
 bindsym $mod+BackSpace          [urgent=latest] focus
 
 #bindsym $mod+grave             scratchpad show
-#bindsym $mod+Shift+grave        move scratchpad
+#bindsym $mod+Shift+grave       move scratchpad
 
 
 bindsym $mod+1                  workspace 1
@@ -137,8 +137,8 @@ mode "resize" {
         bindsym $mod+Shift+Up               move up 50 px
         bindsym $mod+Shift+Right            move right 50 px
 
-        bindsym Return                mode "default"
-        bindsym Escape                mode "default"
+        bindsym Return          mode "default"
+        bindsym Escape          mode "default"
 }
 
 
