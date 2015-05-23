@@ -73,6 +73,7 @@ bindsym $mod+p                  layout toggle split
 
 bindsym $mod+Shift+space        floating toggle
 bindsym $mod+space              focus mode_toggle
+bindsym $mod+Control+space      move absolute position center
 
 bindsym $mod+Escape             workspace back_and_forth
 
