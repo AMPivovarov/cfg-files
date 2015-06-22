@@ -201,3 +201,5 @@ for_window [class="Skype"] floating disable
 
 assign [class="Google-chrome"] 3
 assign [class="Yandex-browser"] 3
+assign [class="Thunderbird"] 4
+assign [class="Kvirc"] 9
