@@ -5,7 +5,8 @@ set $alt Mod1
 font pango:sans 8
 
 
-# Use Mouse+$mod to drag floating windows to their wanted position
+# Use LMB+$mod to move floating windows
+# Use RMB+$mod to resize floating windows. +Shift to keep proportions.
 floating_modifier $mod
 
 # using https://github.com/AMPivovarov/quickswitch-for-i3
