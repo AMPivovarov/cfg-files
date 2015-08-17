@@ -12,6 +12,7 @@ alias s='subl'
 
 alias memleak='valgrind --leak-check=yes'
 alias open='xdg-open'
+alias iotop='sudo iotop'
 
 alias pacman='yaourt'
 
