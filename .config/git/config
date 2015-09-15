@@ -5,7 +5,9 @@
 	email = AMPivovarov@gmail.com
 [alias]
 	s = status -sb
-	c = commit
+	cc = commit
+	c = checkout
+	ri = rebase -i
 	graph = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 [push]
 	default = simple
