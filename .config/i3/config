@@ -176,7 +176,12 @@ client.unfocused                $border_normal  $bg_normal      $fg_normal      
 client.urgent                   $border_urgent  $bg_urgent      $fg_urgent      $bg_urgent
 #client.focused_inactive
 
-bindsym $mod+Shift+Return       bar mode toggle
+bindsym $mod+Shift+Return           bar mode toggle
+
+bindsym $mod+slash                  border normal
+bindsym $mod+Control+slash          border 1pixel
+bindsym $mod+Shift+slash            [class="^.*"]   border normal
+bindsym $mod+Shift+Control+slash    [class="^.*"]   border 1pixel
 
 bar {
         font pango:sans 8
