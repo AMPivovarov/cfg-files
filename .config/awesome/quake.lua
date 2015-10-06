@@ -28,8 +28,8 @@
 
 local setmetatable = setmetatable
 local string = string
-local awful = require("awful")
-local math = require("math")
+local awful  = require("awful")
+local math   = require("math")
 local capi = { mouse = mouse,
                screen = screen,
                client = client,
@@ -42,16 +42,13 @@ local QuakeConsole = {}
 -- Display
 function QuakeConsole:display()
   -- First, we locate the terminal
-  local client = nil
-  local i = 0
+  local client
 
-  for c in awful.client.iterate(
-              -- c.name may be changed!
-              function (c) return c.instance == self.name end,
-              nil, self.screen)
+  -- c.name may be changed!
+  for c in awful.client.iterate(function (c) return c.instance == self.name end,
+                                nil, self.screen)
     do
-      i = i + 1
-      if i == 1 then
+      if client == nil then
         client = c
       else
         -- Additional matching clients, let's remove the sticky bit
@@ -71,8 +68,7 @@ function QuakeConsole:display()
 
   if not client then
     -- The client does not exist, we spawn it
-    awful.util.spawn(self.terminal .. " " .. string.format(self.argname, self.name),
-                     false, self.screen)
+    awful.util.spawn(self.terminal .. " " .. string.format(self.argname, self.name), false, self.screen)
     return
   end
 
@@ -91,7 +87,7 @@ function QuakeConsole:display()
   elseif self.vert == "bottom" then y = geom.height + geom.y - height
   else   y = geom.y + (geom.height - height)/2 end
 
-  width = width - self.border_width * 2
+  width  = width  - self.border_width * 2
   height = height - self.border_width * 2
 
   -- Resize
@@ -127,33 +123,31 @@ function QuakeConsole:new(config)
 
   -- The application to be invoked is:
   --   config.terminal .. " " .. string.format(config.argname, config.name)
-  config.terminal = config.terminal or "xterm" -- application to spawn
+  config.terminal = config.terminal or "xterm"        -- application to spawn
   config.name     = config.name     or "QuakeConsoleNeedsUniqueName" -- window name
   config.argname  = config.argname  or "-name %s"     -- how to specify window name
 
   -- If width or height <= 1 this is a proportion of the workspace
-  config.height   = config.height   or 0.25        -- height
-  config.width    = config.width    or 1        -- width
+  config.height   = config.height   or 0.25           -- height
+  config.width    = config.width    or 1              -- width
   config.vert     = config.vert     or "top"          -- top, bottom or center
   config.horiz    = config.horiz    or "center"       -- left, right or center
-  config.border_width  = config.border_width or 0 -- Initially, no border
+  config.border_width  = config.border_width or 0     -- Initially, no border
 
   config.screen   = config.screen  or capi.mouse.screen
-  config.visible  = config.visible or false -- Initially, not visible
+  config.visible  = config.visible or false           -- Initially, not visible
 
   local console = setmetatable(config, { __index = QuakeConsole })
-  capi.client.connect_signal("manage",
-            function(c)
-              if c.instance == console.name and c.screen == console.screen then
-                console:display()
-              end
-            end)
-  capi.client.connect_signal("unmanage",
-            function(c)
-              if c.instance == console.name and c.screen == console.screen then
-                console.visible = false
-              end
-            end)
+  capi.client.connect_signal("manage", function(c)
+    if c.instance == console.name and c.screen == console.screen then
+      console:display()
+    end
+  end)
+  capi.client.connect_signal("unmanage", function(c)
+    if c.instance == console.name and c.screen == console.screen then
+      console.visible = false
+    end
+  end)
 
   -- "Reattach" currently running QuakeConsole. This is in case awesome is restarted.
   local reattach = capi.timer { timeout = 0 }

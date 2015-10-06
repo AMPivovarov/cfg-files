@@ -3,14 +3,13 @@
 --    By Adrian C. (anrxc)   --
 -------------------------------
 
--- Alternative icon sets and widget icons:
---  * http://awesome.naquadah.org/wiki/Nice_Icons
+local awful = require("awful")
 
 -- {{{ Main
-theme = {}
-theme.confdir = awful.util.getdir("config")
-theme.zenburn_dir = awful.util.getdir("config") .. "/zenburn"
--- theme.wallpaper = { theme.zenburn_dir .. "/zenburn-background.png" }
+local theme = {}
+theme.confdir       = awful.util.getdir("config")
+theme.zenburn_dir   = awful.util.getdir("config") .. "/zenburn"
+--theme.wallpaper     = { theme.zenburn_dir .. "/zenburn-background.png" }
 theme.wallpaper_cmd = { awful.util.spawn("hsetroot -solid '#131313'") }
 -- }}}
 
@@ -50,8 +49,8 @@ theme.titlebar_bg_normal = theme.bg_normal
 -- titlebar_[normal|focus]
 -- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
 -- Example:
-theme.tasklist_bg_focus = theme.bg_focus_light
-theme.tasklist_fg_focus = theme.fg_focus_light
+-- theme.tasklist_bg_focus = theme.bg_focus_light
+-- theme.tasklist_fg_focus = theme.fg_focus_light
 -- }}}
 
 -- {{{ Widgets
@@ -107,42 +106,42 @@ theme.layout_magnifier  = theme.confdir .. "/icons/layouts/magnifier.png"
 theme.layout_floating   = theme.confdir .. "/icons/layouts/floating.png"
 -- }}}
 
-theme.widget_bat	= theme.confdir .. "/icons/bat.png"
-theme.widget_cpu	= theme.confdir .. "/icons/cpu.png"
-theme.widget_mem	= theme.confdir .. "/icons/mem.png"
-theme.widget_wifi	= theme.confdir .. "/icons/wifi.png"
-theme.widget_fs		= theme.confdir .. "/icons/disk.png"
-theme.widget_netup	= theme.confdir .. "/icons/up.png"
-theme.widget_net	= theme.confdir .. "/icons/down.png"
-theme.widget_mail	= theme.confdir .. "/icons/mail.png"
-theme.widget_vol	= theme.confdir .. "/icons/vol.png"
-theme.widget_org	= theme.confdir .. "/icons/cal.png"
-theme.widget_date	= theme.confdir .. "/icons/time.png"
-theme.widget_bat	= theme.confdir .. "/icons/bat.png"
-theme.widget_crypto	= theme.confdir .. "/icons/crypto.png"
-theme.widget_sep	= theme.confdir .. "/icons/separator.png"
+theme.widget_bat	      = theme.confdir .. "/icons/bat.png"
+theme.widget_cpu	      = theme.confdir .. "/icons/cpu.png"
+theme.widget_mem	      = theme.confdir .. "/icons/mem.png"
+theme.widget_wifi	      = theme.confdir .. "/icons/wifi.png"
+theme.widget_fs		      = theme.confdir .. "/icons/disk.png"
+theme.widget_netup	    = theme.confdir .. "/icons/up.png"
+theme.widget_net	      = theme.confdir .. "/icons/down.png"
+theme.widget_mail	      = theme.confdir .. "/icons/mail.png"
+theme.widget_vol	      = theme.confdir .. "/icons/vol.png"
+theme.widget_org	      = theme.confdir .. "/icons/cal.png"
+theme.widget_date	      = theme.confdir .. "/icons/time.png"
+theme.widget_bat	      = theme.confdir .. "/icons/bat.png"
+theme.widget_crypto	    = theme.confdir .. "/icons/crypto.png"
+theme.widget_sep	      = theme.confdir .. "/icons/separator.png"
 
 -- {{{ Titlebar
 theme.titlebar_close_button_focus  = theme.confdir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal = theme.confdir .. "/icons/titlebar/close_normal.png"
 
-theme.titlebar_ontop_button_focus_active  = theme.confdir .. "/icons/titlebar/ontop_focus_active.png"
-theme.titlebar_ontop_button_normal_active = theme.confdir .. "/icons/titlebar/ontop_normal_active.png"
+theme.titlebar_ontop_button_focus_active    = theme.confdir .. "/icons/titlebar/ontop_focus_active.png"
+theme.titlebar_ontop_button_normal_active   = theme.confdir .. "/icons/titlebar/ontop_normal_active.png"
 theme.titlebar_ontop_button_focus_inactive  = theme.confdir .. "/icons/titlebar/ontop_focus_inactive.png"
 theme.titlebar_ontop_button_normal_inactive = theme.confdir .. "/icons/titlebar/ontop_normal_inactive.png"
 
-theme.titlebar_sticky_button_focus_active  = theme.confdir .. "/icons/titlebar/sticky_focus_active.png"
-theme.titlebar_sticky_button_normal_active = theme.confdir .. "/icons/titlebar/sticky_normal_active.png"
+theme.titlebar_sticky_button_focus_active    = theme.confdir .. "/icons/titlebar/sticky_focus_active.png"
+theme.titlebar_sticky_button_normal_active   = theme.confdir .. "/icons/titlebar/sticky_normal_active.png"
 theme.titlebar_sticky_button_focus_inactive  = theme.confdir .. "/icons/titlebar/sticky_focus_inactive.png"
 theme.titlebar_sticky_button_normal_inactive = theme.confdir .. "/icons/titlebar/sticky_normal_inactive.png"
 
-theme.titlebar_floating_button_focus_active  = theme.confdir .. "/icons/titlebar/floating_focus_active.png"
-theme.titlebar_floating_button_normal_active = theme.confdir .. "/icons/titlebar/floating_normal_active.png"
+theme.titlebar_floating_button_focus_active    = theme.confdir .. "/icons/titlebar/floating_focus_active.png"
+theme.titlebar_floating_button_normal_active   = theme.confdir .. "/icons/titlebar/floating_normal_active.png"
 theme.titlebar_floating_button_focus_inactive  = theme.confdir .. "/icons/titlebar/floating_focus_inactive.png"
 theme.titlebar_floating_button_normal_inactive = theme.confdir .. "/icons/titlebar/floating_normal_inactive.png"
 
-theme.titlebar_maximized_button_focus_active  = theme.confdir .. "/icons/titlebar/maximized_focus_active.png"
-theme.titlebar_maximized_button_normal_active = theme.confdir .. "/icons/titlebar/maximized_normal_active.png"
+theme.titlebar_maximized_button_focus_active    = theme.confdir .. "/icons/titlebar/maximized_focus_active.png"
+theme.titlebar_maximized_button_normal_active   = theme.confdir .. "/icons/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_inactive  = theme.confdir .. "/icons/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.confdir .. "/icons/titlebar/maximized_normal_inactive.png"
 -- }}}
