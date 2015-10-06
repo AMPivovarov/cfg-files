@@ -374,8 +374,8 @@ end
 
 globalkeys = awful.util.table.join( globalkeys,
     awful.key({ modkey,               }, "`",       function () quakeconsole[mouse.screen]:toggle() end),
-    awful.key({ modkey,         shift }, "`",       function () quakeconsole[mouse.screen]:raise()  end),
-    awful.key({ modkey,  ctrl         }, "`",       function () quakeconsole[mouse.screen]:shrink() end)
+    awful.key({ modkey,         shift }, "`",       function () quakeconsole[mouse.screen]:resize( 0.1)  end),
+    awful.key({ modkey,  ctrl         }, "`",       function () quakeconsole[mouse.screen]:resize(-0.1) end)
 )
 -- }}}
 
