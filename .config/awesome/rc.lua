@@ -31,6 +31,12 @@ local PrevMB = 5
 local util = {}
 util.join = awful.util.table.join
 util.notify = function(title, text) naughty.notify({ title = title, text = text, timeout = 1 }) end
+util.indexOf = function(table, item)
+                  for key, value in pairs(table) do
+                    if value == item then return key end
+                  end
+                  return nil
+               end
 
 -- {{{ Layout
 local layouts = { -- order matters, see awful.layout.inc
@@ -442,6 +448,10 @@ for s = 1, screen.count() do
   screen[s]:connect_signal("arrange", function()
     local clients = awful.client.visible(s)
     local layout = awful.layout.getname(awful.layout.get(s))
+
+    local quakeConsole = quakeconsole[s].client
+    local quakeIndex = util.indexOf(clients, quakeConsole)
+    if quakeIndex then table.remove(clients, quakeIndex) end
 
     if #clients > 0 then
       for _, c in pairs(clients) do

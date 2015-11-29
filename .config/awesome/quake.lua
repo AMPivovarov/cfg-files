@@ -39,27 +39,30 @@ module("quake")
 
 local QuakeConsole = {}
 
+function QuakeConsole:findConsole()
+  if self.client then
+    return
+  end
+
+  for c in awful.client.iterate(function(c) return c.instance == self.name end, nil, self.screen) do
+    if self.client == nil then
+      self.client = c
+    else
+      -- Additional matching clients, let's remove the sticky bit
+      -- which may persist between awesome restarts. We don't close
+      -- them as they may be valuable. They will just turn into a
+      -- classic terminal.
+      c.sticky = false
+      c.ontop = false
+      c.above = false
+    end
+  end
+end
+
 -- Display
 function QuakeConsole:display()
   -- First, we locate the terminal
-  local client
-
-  -- c.name may be changed!
-  for c in awful.client.iterate(function (c) return c.instance == self.name end,
-                                nil, self.screen)
-    do
-      if client == nil then
-        client = c
-      else
-        -- Additional matching clients, let's remove the sticky bit
-        -- which may persist between awesome restarts. We don't close
-        -- them as they may be valuable. They will just turn into a
-        -- classic terminal.
-        c.sticky = false
-        c.ontop = false
-        c.above = false
-      end
-  end
+  local client = self.client
 
   if not client and not self.visible then
     -- The terminal is not here yet but we don't want it yet. Just do nothing.
@@ -139,23 +142,26 @@ function QuakeConsole:new(config)
 
   local console = setmetatable(config, { __index = QuakeConsole })
   capi.client.connect_signal("manage", function(c)
-    if c.instance == console.name and c.screen == console.screen then
+    if console.client == nil and c.instance == console.name and c.screen == console.screen then
+      console.client = c
       console:display()
     end
   end)
   capi.client.connect_signal("unmanage", function(c)
-    if c.instance == console.name and c.screen == console.screen then
+    if c == console.client then
       console.visible = false
+      console.client = nil
     end
   end)
 
   -- "Reattach" currently running QuakeConsole. This is in case awesome is restarted.
   local reattach = capi.timer { timeout = 0 }
   reattach:connect_signal("timeout",
-            function()
-              reattach:stop()
-              console:display()
-            end)
+    function()
+      reattach:stop()
+      console:findConsole()
+      console:display()
+    end)
   reattach:start()
 
   return console
