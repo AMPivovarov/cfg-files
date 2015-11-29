@@ -69,6 +69,8 @@ end
 
 
 -- {{{ Wibox
+local wibox_visible = true
+
 local separator = wibox.widget.imagebox()
 separator:set_image(beautiful.widget_sep)
 
@@ -164,6 +166,13 @@ local globalkeys = util.join(
     awful.key({ modkey,  ctrl,  shift }, "Down",    function() awful.client.moveresize(0, 0, 0, 20) end),
     awful.key({ modkey,  ctrl,  shift }, "Right",   function() awful.client.moveresize(0, 0, 20, 0) end),
     awful.key({ modkey,  ctrl,  shift }, "Left",    function() awful.client.moveresize(0, 0, -20, 0) end),
+
+    awful.key({ modkey, shift          }, "Return", function ()
+      for s = 1, screen.count() do
+        mywibox[s].visible = not wibox_visible
+      end
+      wibox_visible = not wibox_visible
+    end),
 
     awful.key({ modkey,         shift }, "Left",
         function()
