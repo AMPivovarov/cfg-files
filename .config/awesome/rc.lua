@@ -157,173 +157,168 @@ local clientbuttons = util.join(
 )
 
 local globalkeys = util.join(
-    awful.key({ modkey,  ctrl         }, "Up",      function() awful.client.moveresize(0, -20, 0, 0) end),
-    awful.key({ modkey,  ctrl         }, "Down",    function() awful.client.moveresize(0, 20, 0, 0) end),
-    awful.key({ modkey,  ctrl         }, "Left",    function() awful.client.moveresize(-20, 0, 0, 0) end),
-    awful.key({ modkey,  ctrl         }, "Right",   function() awful.client.moveresize(20, 0, 0, 0) end),
+  awful.key({ modkey,  ctrl         }, "Up",      function() awful.client.moveresize(0, -20, 0, 0) end),
+  awful.key({ modkey,  ctrl         }, "Down",    function() awful.client.moveresize(0, 20, 0, 0) end),
+  awful.key({ modkey,  ctrl         }, "Left",    function() awful.client.moveresize(-20, 0, 0, 0) end),
+  awful.key({ modkey,  ctrl         }, "Right",   function() awful.client.moveresize(20, 0, 0, 0) end),
 
-    awful.key({ modkey,  ctrl,  shift }, "Up",      function() awful.client.moveresize(0, 0, 0, -20) end),
-    awful.key({ modkey,  ctrl,  shift }, "Down",    function() awful.client.moveresize(0, 0, 0, 20) end),
-    awful.key({ modkey,  ctrl,  shift }, "Right",   function() awful.client.moveresize(0, 0, 20, 0) end),
-    awful.key({ modkey,  ctrl,  shift }, "Left",    function() awful.client.moveresize(0, 0, -20, 0) end),
+  awful.key({ modkey,  ctrl,  shift }, "Up",      function() awful.client.moveresize(0, 0, 0, -20) end),
+  awful.key({ modkey,  ctrl,  shift }, "Down",    function() awful.client.moveresize(0, 0, 0, 20) end),
+  awful.key({ modkey,  ctrl,  shift }, "Right",   function() awful.client.moveresize(0, 0, 20, 0) end),
+  awful.key({ modkey,  ctrl,  shift }, "Left",    function() awful.client.moveresize(0, 0, -20, 0) end),
 
-    awful.key({ modkey, shift          }, "Return", function ()
-      for s = 1, screen.count() do
-        mywibox[s].visible = not wibox_visible
+  awful.key({ modkey, shift          }, "Return", function ()
+    for s = 1, screen.count() do
+      mywibox[s].visible = not wibox_visible
+    end
+    wibox_visible = not wibox_visible
+  end),
+
+  awful.key({ modkey,         shift }, "Left",
+    function()
+      local curidx = awful.tag.getidx()
+      if curidx == 1 then
+        awful.client.movetotag(tags[client.focus.screen][tags.count])
+      else
+        awful.client.movetotag(tags[client.focus.screen][curidx - 1])
       end
-      wibox_visible = not wibox_visible
+    end),
+  awful.key({ modkey,         shift }, "Right",
+    function()
+      local curidx = awful.tag.getidx()
+      if curidx == tags.count then
+        awful.client.movetotag(tags[client.focus.screen][1])
+      else
+        awful.client.movetotag(tags[client.focus.screen][curidx + 1])
+      end
     end),
 
-    awful.key({ modkey,         shift }, "Left",
-        function()
-            local curidx = awful.tag.getidx()
-            if curidx == 1 then
-                awful.client.movetotag(tags[client.focus.screen][tags.count])
-            else
-                awful.client.movetotag(tags[client.focus.screen][curidx - 1])
-            end
-        end),
-    awful.key({ modkey,         shift }, "Right",
-        function()
-            local curidx = awful.tag.getidx()
-            if curidx == tags.count then
-                awful.client.movetotag(tags[client.focus.screen][1])
-            else
-                awful.client.movetotag(tags[client.focus.screen][curidx + 1])
-            end
-        end),
+  awful.key({ modkey,               }, "Escape",
+    function ()
+      awful.client.focus.history.previous()
+      if client.focus then client.focus:raise() end
+    end),
+  awful.key({ modkey,         shift }, "Escape",  awful.tag.history.restore),
 
-    awful.key({ modkey,               }, "Escape",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then client.focus:raise() end
-        end),
-    awful.key({ modkey,         shift }, "Escape",  awful.tag.history.restore),
+  awful.key({ modkey,               }, "Return",  function () exec(terminal) end),
+  awful.key({ modkey,               }, "a",       function () exec("google-chrome-stable") end),
+  awful.key({ modkey,         shift }, "a",       function () exec("opera") end),
+  awful.key({ modkey,               }, "s",       function () exec("subl") end),
 
-    awful.key({ modkey,               }, "Return",  function () exec(terminal) end),
-    awful.key({ modkey,               }, "a",       function () exec("google-chrome-stable") end),
-    awful.key({ modkey,         shift }, "a",       function () exec("opera") end),
-    awful.key({ modkey,               }, "s",       function () exec("subl") end),
+  awful.key({ modkey,         shift }, "r",       awesome.restart),
+  awful.key({ modkey,         shift }, "q",       awesome.quit),
 
-    awful.key({ modkey,         shift }, "r",       awesome.restart),
-    awful.key({ modkey,         shift }, "q",       awesome.quit),
+  awful.key({ modkey,               }, "z",       function () promptbox[mouse.screen]:run() end),
 
-    awful.key({ modkey,               }, "z",       function () promptbox[mouse.screen]:run() end),
-
-    awful.key({                       }, "Print",   function () exec ("scrot-wrapper        ") end),
-    awful.key({                 shift }, "Print",   function () sexec("scrot-wrapper    -d 1") end),
-    awful.key({ alt   ,               }, "Print",   function () exec ("scrot-wrapper -u     ") end),
-    awful.key({ alt   ,         shift }, "Print",   function () sexec("scrot-wrapper -u -d 1") end),
+  awful.key({                       }, "Print",   function () exec ("scrot-wrapper        ") end),
+  awful.key({                 shift }, "Print",   function () sexec("scrot-wrapper    -d 1") end),
+  awful.key({ alt   ,               }, "Print",   function () exec ("scrot-wrapper -u     ") end),
+  awful.key({ alt   ,         shift }, "Print",   function () sexec("scrot-wrapper -u -d 1") end),
 
 
-    awful.key({ modkey,               }, "Left",
-        function ()
-            -- awful.client.focus.history.previous()
-            awful.client.focus.byidx(-1)
-            if client.focus then client.focus:raise() end
-        end),
-    awful.key({ modkey,               }, "Right",
-        function ()
-            awful.client.focus.byidx( 1)
-            if client.focus then client.focus:raise() end
-        end),
+  awful.key({ modkey,               }, "Left",
+    function()
+      awful.client.focus.byidx(-1)
+      if client.focus then client.focus:raise() end
+    end),
+  awful.key({ modkey,               }, "Right",
+    function()
+      awful.client.focus.byidx(1)
+      if client.focus then client.focus:raise() end
+    end),
 
-    awful.key({ modkey,               }, "Tab",
-        function ()
-            -- awful.client.focus.history.previous()
-            awful.client.focus.byidx(-1)
-            if client.focus then client.focus:raise() end
-        end),
-    awful.key({ modkey,         shift }, "Tab",
-        function ()
-            awful.client.focus.byidx( 1)
-            if client.focus then client.focus:raise() end
-        end),
+  awful.key({ modkey,               }, "Tab",
+    function()
+      awful.client.focus.byidx(-1)
+      if client.focus then client.focus:raise() end
+    end),
+  awful.key({ modkey,         shift }, "Tab",
+    function()
+      awful.client.focus.byidx(1)
+      if client.focus then client.focus:raise() end
+    end),
 
 
-  -- Default
+  awful.key({ modkey,               }, "j",
+    function()
+      awful.client.focus.byidx(1)
+      if client.focus then client.focus:raise() end
+    end),
+  awful.key({ modkey,               }, "k",
+    function()
+      awful.client.focus.byidx(-1)
+      if client.focus then client.focus:raise() end
+    end),
 
-    awful.key({ modkey,               }, "j",
-        function ()
-            awful.client.focus.byidx( 1)
-            if client.focus then client.focus:raise() end
-        end),
-    awful.key({ modkey,               }, "k",
-        function ()
-            awful.client.focus.byidx(-1)
-            if client.focus then client.focus:raise() end
-        end),
+  -- Layout manipulation
+  awful.key({ modkey,         shift }, "j",       function () awful.client.swap.byidx(  1)    end),
+  awful.key({ modkey,         shift }, "k",       function () awful.client.swap.byidx( -1)    end),
+  awful.key({ modkey,  ctrl         }, "j",       function () awful.screen.focus_relative( 1) end),
+  awful.key({ modkey,  ctrl         }, "k",       function () awful.screen.focus_relative(-1) end),
+  awful.key({ modkey,               }, "u",       awful.client.urgent.jumpto),
 
-    -- Layout manipulation
-    awful.key({ modkey,         shift }, "j",       function () awful.client.swap.byidx(  1)    end),
-    awful.key({ modkey,         shift }, "k",       function () awful.client.swap.byidx( -1)    end),
-    awful.key({ modkey,  ctrl         }, "j",       function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey,  ctrl         }, "k",       function () awful.screen.focus_relative(-1) end),
-    awful.key({ modkey,               }, "u",       awful.client.urgent.jumpto),
+  awful.key({ modkey,               }, "l",       function () awful.tag.incmwfact( 0.05)    end),
+  awful.key({ modkey,               }, "h",       function () awful.tag.incmwfact(-0.05)    end),
 
-    awful.key({ modkey,               }, "l",       function () awful.tag.incmwfact( 0.05)    end),
-    awful.key({ modkey,               }, "h",       function () awful.tag.incmwfact(-0.05)    end),
+  awful.key({ modkey,         shift }, "h",
+    function()
+      awful.tag.incnmaster(1)
+      util.notify("Master", tostring(awful.tag.getnmaster()))
+    end),
+  awful.key({ modkey,         shift }, "l",
+    function()
+      awful.tag.incnmaster(-1)
+      util.notify("Master", tostring(awful.tag.getnmaster()))
+    end),
+  awful.key({ modkey,  ctrl         }, "h",
+    function()
+      awful.tag.incncol(1)
+      util.notify("Columns", tostring(awful.tag.getncol()))
+    end),
+  awful.key({ modkey,  ctrl         }, "l",
+    function()
+      awful.tag.incncol(-1)
+      util.notify("Columns", tostring(awful.tag.getncol()))
+    end),
 
-    awful.key({ modkey,         shift }, "h",
-        function ()
-            awful.tag.incnmaster( 1)
-            util.notify("Master", tostring(awful.tag.getnmaster()))
-        end),
-    awful.key({ modkey,         shift }, "l",
-        function ()
-            awful.tag.incnmaster(-1)
-            util.notify("Master", tostring(awful.tag.getnmaster()))
-        end),
-    awful.key({ modkey,  ctrl         }, "h",
-        function ()
-            awful.tag.incncol( 1)
-            util.notify("Columns", tostring(awful.tag.getncol()))
-        end),
-    awful.key({ modkey,  ctrl         }, "l",
-        function ()
-            awful.tag.incncol(-1)
-            util.notify("Columns", tostring(awful.tag.getncol()))
-        end),
+  awful.key({ modkey,               }, "space",   function () awful.layout.inc(layouts,  1) end),
+  awful.key({ modkey,         shift }, "space",   function () awful.layout.inc(layouts, -1) end),
 
-    awful.key({ modkey,               }, "space",   function () awful.layout.inc(layouts,  1) end),
-    awful.key({ modkey,         shift }, "space",   function () awful.layout.inc(layouts, -1) end),
+  awful.key({ modkey,  ctrl         }, "n",       awful.client.restore),
 
-    awful.key({ modkey,  ctrl         }, "n",       awful.client.restore),
+  -- Standard program
 
-    -- Standard program
+  awful.key({                       }, "XF86MonBrightnessDown",   function () exec("xbacklight -dec 15") end),
+  awful.key({                       }, "XF86MonBrightnessUp",     function () exec("xbacklight -inc 15") end),
+  awful.key({                 shift }, "XF86MonBrightnessDown",   function () exec("xbacklight -dec 5") end),
+  awful.key({                 shift }, "XF86MonBrightnessUp",     function () exec("xbacklight -inc 5") end),
+  awful.key({                       }, "XF86KbdBrightnessUp",     function () exec("asus-kbd-backlight up") end),
+  awful.key({                       }, "XF86KbdBrightnessDown",   function () exec("asus-kbd-backlight down") end),
 
-    awful.key({                       }, "XF86MonBrightnessDown",   function () exec("xbacklight -dec 15") end),
-    awful.key({                       }, "XF86MonBrightnessUp",     function () exec("xbacklight -inc 15") end),
-    awful.key({                 shift }, "XF86MonBrightnessDown",   function () exec("xbacklight -dec 5") end),
-    awful.key({                 shift }, "XF86MonBrightnessUp",     function () exec("xbacklight -inc 5") end),
-    awful.key({                       }, "XF86KbdBrightnessUp",     function () exec("asus-kbd-backlight up") end),
-    awful.key({                       }, "XF86KbdBrightnessDown",   function () exec("asus-kbd-backlight down") end),
+  awful.key({                       }, "XF86TouchpadToggle",
+    function()
+      sexec("synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')")
+    end),
 
-    awful.key({                       }, "XF86TouchpadToggle",
-        function ()
-            sexec("synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')")
-        end),
-
-    awful.key({ modkey,               }, "F12",     function () exec("xautolock -locknow", false) end)
+  awful.key({ modkey,               }, "F12",     function () exec("xautolock -locknow", false) end)
 )
 
 local clientkeys = util.join(
-    awful.key({ modkey,               }, "w",       function (c) c:kill()                         end),
-    awful.key({ modkey,         shift }, "e",       function (c) c.fullscreen = not c.fullscreen  end),
-    awful.key({ modkey,               }, "e",
-        function (c)
-            c.maximized_horizontal = not c.maximized_horizontal
-            c.maximized_vertical   = not c.maximized_vertical
-        end),
+  awful.key({ modkey,               }, "w",       function (c) c:kill()                         end),
+  awful.key({ modkey,         shift }, "e",       function (c) c.fullscreen = not c.fullscreen  end),
+  awful.key({ modkey,               }, "e",
+    function (c)
+      local maximized = c.maximized_horizontal and c.maximized_vertical
+      c.maximized_horizontal = not maximized
+      c.maximized_vertical   = not maximized
+    end),
 
-    -- Default
-
-    awful.key({ modkey,  ctrl         }, "space",   awful.client.floating.toggle                     ),
-    awful.key({ modkey,  ctrl         }, "Return",  function (c) c:swap(awful.client.getmaster()) end),
-    awful.key({ modkey,               }, "o",       awful.client.movetoscreen                        ),
-    awful.key({ modkey,  ctrl         }, "r",       function (c) c:redraw()                       end),
-    awful.key({ modkey,               }, "t",       function (c) c.ontop = not c.ontop            end),
-    awful.key({ modkey,               }, "n",       function (c) c.minimized = true               end)
+  awful.key({ modkey,  ctrl         }, "space",   awful.client.floating.toggle                     ),
+  awful.key({ modkey,  ctrl         }, "Return",  function (c) c:swap(awful.client.getmaster()) end),
+  awful.key({ modkey,               }, "o",       awful.client.movetoscreen                        ),
+  awful.key({ modkey,  ctrl         }, "r",       function (c) c:redraw()                       end),
+  awful.key({ modkey,               }, "t",       function (c) c.ontop = not c.ontop            end),
+  awful.key({ modkey,               }, "n",       function (c) c.minimized = true               end)
 )
 
 
