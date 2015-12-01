@@ -7,6 +7,19 @@ local wibox     = require("wibox")        -- Panel
 local vicious   = require("vicious")      -- Plugins
 local naughty   = require('naughty')      -- Notification library
 
+do
+  local in_error = false
+  awesome.connect_signal("debug::error", function (err)
+    -- Make sure we don't go into an endless error loop
+    if in_error then return end
+    in_error = true
+
+    naughty.notify({ preset = naughty.config.presets.critical,
+      title = "Runtime error",
+      text = err })
+    in_error = false
+  end)
+end
 
 -- beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 beautiful.init(awful.util.getdir("config") .. "/zenburn/theme.lua")
