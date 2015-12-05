@@ -1,11 +1,15 @@
 local awful     = require("awful")        -- Standard awesome library
-require("awful.autofocus")                -- makes sure that there's always a client that will have focus
 awful.rules     = require("awful.rules")
+require("awful.autofocus")                -- makes sure that there's always a client that will have focus
 
-beautiful       = require("beautiful")    -- Theme handling library
+local beautiful = require("beautiful")    -- Theme handling library
 local wibox     = require("wibox")        -- Panel
 local vicious   = require("vicious")      -- Plugins
 local naughty   = require('naughty')      -- Notification library
+
+local table     = require("util.table")
+
+local ultra     = require("ultraLayout.ultra")
 
 do
   local in_error = false
@@ -27,8 +31,6 @@ beautiful.init(awful.util.getdir("config") .. "/zenburn/theme.lua")
 local terminal  = "urxvtc"
 local exec      = awful.util.spawn
 local sexec     = awful.util.spawn_with_shell
-local editor    = os.getenv("EDITOR") or "nano"
-local home      = os.getenv("HOME")
 
 local modkey = "Mod4"
 local shift  = "Shift"
@@ -37,19 +39,40 @@ local alt    = "Mod1"
 
 local LMB    = 1
 local RMB    = 3
-local NextMB = 4
-local PrevMB = 5
+local WH_UP  = 4
+local WH_DWN = 5
 
 
 local util = {}
 util.join = awful.util.table.join
-util.notify = function(title, text) naughty.notify({ title = title, text = text, timeout = 1 }) end
-util.indexOf = function(table, item)
-                  for key, value in pairs(table) do
-                    if value == item then return key end
-                  end
-                  return nil
-               end
+
+function util.notify(title, text)
+  naughty.notify({ title = title, text = text, timeout = 1 })
+end
+
+function util.append(keys, ...)
+  for i, t in pairs({ ... }) do
+    if t then
+      for k, v in pairs(t) do
+        if type(k) == "number" then
+          table.insert(keys, v)
+        else
+          keys[k] = v
+        end
+      end
+    end
+  end
+end
+
+
+local globalkeys = {}
+function util.register_global_keys_mode(modifiers, key, mode_mapping)
+  local root = root
+  local globalkeys = globalkeys
+  util.append( mode_mapping, awful.key({}, "Escape",      function() root.keys(globalkeys)   end))
+  util.append( globalkeys, awful.key(modifiers, key,    function() root.keys(mode_mapping) end))
+end
+
 
 -- {{{ Layout
 local layouts = { -- order matters, see awful.layout.inc
@@ -106,9 +129,7 @@ taglist.buttons = util.join(
   awful.button({        },  LMB   , awful.tag.viewonly),
   awful.button({ modkey },  LMB   , awful.client.movetotag),
   awful.button({        },  RMB   , awful.tag.viewtoggle),
-  awful.button({ modkey },  RMB   , awful.client.toggletag),
-  awful.button({        },  PrevMB, awful.tag.viewnext),
-  awful.button({        },  NextMB, awful.tag.viewprev)
+  awful.button({ modkey },  RMB   , awful.client.toggletag)
 )
 
 for s = 1, screen.count() do
@@ -118,8 +139,8 @@ for s = 1, screen.count() do
   layoutbox[s]:buttons(util.join(
     awful.button({ }, LMB   , function () awful.layout.inc(layouts,  1) end),
     awful.button({ }, RMB   , function () awful.layout.inc(layouts, -1) end),
-    awful.button({ }, PrevMB, function () awful.layout.inc(layouts,  1) end),
-    awful.button({ }, NextMB, function () awful.layout.inc(layouts, -1) end)
+    awful.button({ }, WH_UP , function () awful.layout.inc(layouts,  1) end),
+    awful.button({ }, WH_DWN, function () awful.layout.inc(layouts, -1) end)
   ))
 
   taglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist.buttons)
@@ -159,8 +180,6 @@ end
 -- }}}
 
 local globalbuttons = util.join(
-  awful.button({ }, PrevMB, awful.tag.viewnext),
-  awful.button({ }, NextMB, awful.tag.viewprev)
 )
 
 local clientbuttons = util.join(
@@ -169,7 +188,7 @@ local clientbuttons = util.join(
   awful.button({ modkey },  RMB, awful.mouse.client.resize)
 )
 
-local globalkeys = util.join(
+util.append( globalkeys,
   awful.key({ modkey,  ctrl         }, "Up",      function() awful.client.moveresize(0, -20, 0, 0) end),
   awful.key({ modkey,  ctrl         }, "Down",    function() awful.client.moveresize(0, 20, 0, 0) end),
   awful.key({ modkey,  ctrl         }, "Left",    function() awful.client.moveresize(-20, 0, 0, 0) end),
@@ -346,7 +365,7 @@ end
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, keynumber do
   local keyCode = "#" .. i + 9
-  globalkeys = util.join(globalkeys,
+  util.append( globalkeys,
     awful.key({ modkey              }, keyCode,
       function()
         local screen = mouse.screen
@@ -389,11 +408,24 @@ for s = 1, screen.count() do
                             screen = s })
 end
 
-globalkeys = util.join( globalkeys,
+util.append( globalkeys,
   awful.key({ modkey,               }, "`",       function () quakeconsole[mouse.screen]:toggle()     end),
   awful.key({ modkey,         shift }, "`",       function () quakeconsole[mouse.screen]:resize( 0.1) end),
   awful.key({ modkey, ctrl          }, "`",       function () quakeconsole[mouse.screen]:resize(-0.1) end)
 )
+-- }}}
+
+
+-- {{{ Ultra layout
+
+util.register_global_keys_mode({ modkey }, "l", util.join(
+  awful.key({ modkey,               }, "p",       function() ultra.init()                       end),
+  awful.key({ modkey,               }, "Up",      function() ultra.move_focus_side("up")        end),
+  awful.key({ modkey,               }, "Down",    function() ultra.move_focus_side("down")      end),
+  awful.key({ modkey,               }, "Left",    function() ultra.move_focus_side("left")      end),
+  awful.key({ modkey,               }, "Right",   function() ultra.move_focus_side("right")     end)
+))
+
 -- }}}
 
 
@@ -467,7 +499,7 @@ for s = 1, screen.count() do
     local layout = awful.layout.getname(awful.layout.get(s))
 
     local quakeConsole = quakeconsole[s].client
-    local quakeIndex = util.indexOf(clients, quakeConsole)
+    local quakeIndex = table.index_of(clients, quakeConsole)
     if quakeIndex then table.remove(clients, quakeIndex) end
 
     if #clients > 0 then
