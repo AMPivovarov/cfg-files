@@ -26,16 +26,12 @@
 -- QuakeConsoleNeedsUniqueName. Otherwise, you may run into problems
 -- with focus.
 
-local setmetatable = setmetatable
-local string = string
 local awful  = require("awful")
 local math   = require("math")
 local capi = { mouse = mouse,
                screen = screen,
                client = client,
                timer = timer }
-
-module("quake")
 
 local QuakeConsole = {}
 
@@ -179,4 +175,4 @@ function QuakeConsole:resize(delta)
   self:display()
 end
 
-setmetatable(_M, { __call = function(_, ...) return QuakeConsole:new(...) end })
+return setmetatable({}, { __call = function(_, ...) return QuakeConsole:new(...) end })
