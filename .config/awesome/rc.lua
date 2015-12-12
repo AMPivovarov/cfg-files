@@ -420,10 +420,14 @@ util.append( globalkeys,
 
 util.register_global_keys_mode({ modkey }, "l", util.join(
   awful.key({ modkey,               }, "p",       function() ultra.init()                       end),
+
   awful.key({ modkey,               }, "Up",      function() ultra.move_focus_side("up")        end),
   awful.key({ modkey,               }, "Down",    function() ultra.move_focus_side("down")      end),
   awful.key({ modkey,               }, "Left",    function() ultra.move_focus_side("left")      end),
-  awful.key({ modkey,               }, "Right",   function() ultra.move_focus_side("right")     end)
+  awful.key({ modkey,               }, "Right",   function() ultra.move_focus_side("right")     end),
+
+  awful.key({ modkey,               }, "{",       function() ultra.move_focus_parent()          end),
+  awful.key({ modkey,               }, "}",       function() ultra.move_focus_child()           end)
 ))
 
 -- }}}

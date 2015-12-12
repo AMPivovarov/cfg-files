@@ -76,36 +76,39 @@ local function create_group(screen, config)
     self:mark_dirty()
   end
 
-  function group:move_focus_somewhere(cnt)
-    if not cnt.focused then return end
-    assert(cnt ~= self.root)
-
-    self.focus = cnt.parent
-  end
-
-
   function group:move_focus_parent()
     if self.focus ~= self.root then
       self.focus = self.focus.parent
-      self.focus:repaint()
     end
   end
 
   function group:move_focus_child()
     if self.focus.active ~= nil then
       self.focus = self.focus.active
-      self.focus.parent:repaint()
     end
   end
 
   function group:move_focus_side(direction)
     checks.assert_one_of(direction, { "left", "right", "up", "down" })
-    -- TODO
+
+    local current = self.focus.leaf and self.focus.parent or self.focus
+    local target
+    while current and target == nil do
+      target = current:move_focus_side(direction)
+      current = current.parent
+    end
+
+    if target then
+      while not target.leaf and target.active do
+        target = target.active
+      end
+      self.focus = target
+    end
   end
 
 
   function group:set_layout(layout)
-    self.focus.layout = layout:new(self.focus)
+    self.focus:set_layout(layout)
     self:mark_dirty()
   end
 
@@ -114,16 +117,29 @@ local function create_group(screen, config)
   end
 
 
-  local function on_focus_changed(group)
-    local current = group.focus
+  local function set_focus(to_focus)
+    if private.focus == to_focus then return end
+    private.focus = to_focus
+
+    local current = to_focus
     while current ~= group.root do
       current.parent.active = current
       current = current.parent
     end
+
+    if to_focus.leaf then
+      client.focus = to_focus.client
+      to_focus.client:raise()
+    else
+      client.focus = nil
+    end
+
+    group:mark_dirty()
   end
 
 
   group.__set_map = {
+    focus = set_focus
   }
 
   group.__get_map = {
@@ -140,11 +156,9 @@ local function create_group(screen, config)
   client.connect_signal("focus", function(client)
     local new_focus = group.client_to_cnt[client]
     if new_focus then
-      group.focus = group.client_to_cnt[client]
+      group.focus = new_focus
     end
   end)
-
-  group:add_signal("focus::changed", on_focus_changed)
 
   return group
 end

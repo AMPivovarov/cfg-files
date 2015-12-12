@@ -1,3 +1,5 @@
+local table = require("util.table")
+
 local function new(cnt)
   local data = {}
 
@@ -20,6 +22,19 @@ local function new(cnt)
   end
 
   function data:repaint()
+  end
+
+  function data:move_focus_side(direction)
+    local index = cnt.active_index
+    if not index then return nil end
+
+    if direction == "left" then
+      return c[index - 1]
+    elseif direction == "right" then
+      return c[index + 1]
+    end
+
+    return nil
   end
 
   return data

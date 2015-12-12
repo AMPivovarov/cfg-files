@@ -46,7 +46,7 @@ module.move_focus_child = function(tag)
   tag_groups[tag]:move_focus_child()
 end
 
-module.move_focus_side = function(tag, direction)
+module.move_focus_side = function(direction, tag)
   local tag = get_tag(tag)
   if not tag_groups[tag] then return end
 

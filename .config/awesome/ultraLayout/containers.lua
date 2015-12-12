@@ -23,7 +23,7 @@ local function create_container(group, parent)
   }
 
   function cnt:__init()
-    private.layout = (self.group.config.default_layout or layouts.tile).new(cnt)
+    cnt:set_layout(self.group.config.default_layout or layouts.tile)
   end
 
   function cnt:get_leaves(to_return)
@@ -42,6 +42,10 @@ local function create_container(group, parent)
     return #self.children == 0
   end
 
+  function cnt:set_layout(layout)
+    private.layout = layout.new(cnt)
+  end
+
   function cnt:do_layout()
     self.layout:layout()
 
@@ -57,17 +61,21 @@ local function create_container(group, parent)
   end
 
   function cnt:add_child(cnt)
-    local index = table.index_of(self.children, self.active) or 0
+    local index = self.active_index or 0
     table.insert(self.children, index + 1, cnt)
   end
 
   function cnt:remove_child(cnt)
-    local index = table.index_of(self.children, self.active) or 0
+    local index = self.active_index or 0
     table.remove_value(self.children, cnt)
 
     if cnt == self.active then
       self.active = self.children[index] or self.children[index - 1]
     end
+  end
+
+  function cnt:move_focus_side(direction)
+    return self.layout:move_focus_side(direction)
   end
 
 
@@ -78,6 +86,7 @@ local function create_container(group, parent)
   cnt.__get_map = {
     geometry = function() return { x = cnt.x, y = cnt.y, width = cnt.width, height = cnt.height } end,
     focused  = function() return group.focus == cnt end,
+    active_index = function() return table.index_of(cnt.children, cnt.active) end,
   }
 
   local args = {
