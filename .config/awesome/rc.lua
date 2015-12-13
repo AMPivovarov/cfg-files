@@ -419,15 +419,20 @@ util.append( globalkeys,
 -- {{{ Ultra layout
 
 util.register_global_keys_mode({ modkey }, "l", util.join(
-  awful.key({ modkey,               }, "p",       function() ultra.init()                       end),
+  awful.key({ modkey,               }, "Return",    function() exec(terminal)                     end),
 
-  awful.key({ modkey,               }, "Up",      function() ultra.move_focus_side("up")        end),
-  awful.key({ modkey,               }, "Down",    function() ultra.move_focus_side("down")      end),
-  awful.key({ modkey,               }, "Left",    function() ultra.move_focus_side("left")      end),
-  awful.key({ modkey,               }, "Right",   function() ultra.move_focus_side("right")     end),
+  awful.key({ modkey,               }, "BackSpace", function() ultra.init()                       end),
 
-  awful.key({ modkey,               }, "{",       function() ultra.move_focus_parent()          end),
-  awful.key({ modkey,               }, "}",       function() ultra.move_focus_child()           end)
+  awful.key({ modkey,               }, "Up",        function() ultra.move_focus_side("up")        end),
+  awful.key({ modkey,               }, "Down",      function() ultra.move_focus_side("down")      end),
+  awful.key({ modkey,               }, "Left",      function() ultra.move_focus_side("left")      end),
+  awful.key({ modkey,               }, "Right",     function() ultra.move_focus_side("right")     end),
+
+  awful.key({ modkey,               }, "[",         function() ultra.move_focus_parent()          end),
+  awful.key({ modkey,               }, "]",         function() ultra.move_focus_child()           end),
+
+  awful.key({ modkey,               }, "h",         function() ultra.set_layout(ultra.layouts.h_split) end),
+  awful.key({ modkey,               }, "v",         function() ultra.set_layout(ultra.layouts.v_split) end)
 ))
 
 -- }}}

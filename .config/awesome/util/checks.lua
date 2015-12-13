@@ -9,7 +9,7 @@ module.is_bool   = function(value) return type(value) == "boolean"  end
 module.is_int    = function(value) return value % 1 == 0 end
 
 local report_type_error = function(value, check)
-  if not check(value) then error("Wrong type given: " .. type(value)) end
+  if not check(value) then error("Wrong type given: " .. type(value) .. "\n" .. debug.traceback()) end
 end
 module.assert_nil    = function(value) report_type_error(value, module.is_nil   ) end
 module.assert_number = function(value) report_type_error(value, module.is_number) end
@@ -29,7 +29,7 @@ module.assert_one_of = function(value, expected)
     variants = variants and variants .. ", " or ""
     variants = variants .. tostring(v)
   end
-  error("Unexpected argument: " .. tostring(value) .. " passed, but one of " .. variants .. " expected")
+  error("Unexpected argument: " .. tostring(value) .. " passed, but one of " .. variants .. " expected" .. "\n" .. debug.traceback())
 end
 
 return module

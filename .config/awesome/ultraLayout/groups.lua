@@ -46,7 +46,7 @@ local function create_group(screen, config)
 
 
   function group:handle_add_client(client)
-    local parent = self.focus.leaf and self.focus.parent or self.focus
+    local parent = self.focus_cnt
 
     local cnt = create_container(self, parent, client)
     parent:add_child(cnt)
@@ -91,7 +91,7 @@ local function create_group(screen, config)
   function group:move_focus_side(direction)
     checks.assert_one_of(direction, { "left", "right", "up", "down" })
 
-    local current = self.focus.leaf and self.focus.parent or self.focus
+    local current = self.focus_cnt
     local target
     while current and target == nil do
       target = current:move_focus_side(direction)
@@ -108,12 +108,37 @@ local function create_group(screen, config)
 
 
   function group:set_layout(layout)
-    self.focus:set_layout(layout)
+    local current = self.focus
+
+    if current.leaf then
+      local parent = current.parent
+      local index = table.index_of(parent.children, current)
+
+      local new_cnt = create_container(group, parent)
+      new_cnt:set_layout(layout)
+      new_cnt:add_child(current)
+      current.parent = new_cnt
+
+      parent.children[index] = new_cnt
+      if parent.active == current then
+        parent.active = new_cnt
+      end
+    else
+      current:set_layout(layout)
+    end
+
     self:mark_dirty()
   end
 
   function group:mark_dirty()
     awful.layout.arrange(self.screen)
+  end
+
+  function group:refresh_focus()
+    local new_focus = group.client_to_cnt[client.focus]
+    if new_focus then
+      group.focus = new_focus
+    end
   end
 
 
@@ -143,6 +168,7 @@ local function create_group(screen, config)
   }
 
   group.__get_map = {
+    focus_cnt = function() return group.focus.leaf and group.focus.parent or group.focus end,
   }
 
   local args = {
@@ -154,10 +180,7 @@ local function create_group(screen, config)
 
 
   client.connect_signal("focus", function(client)
-    local new_focus = group.client_to_cnt[client]
-    if new_focus then
-      group.focus = new_focus
-    end
+    group:refresh_focus()
   end)
 
   return group

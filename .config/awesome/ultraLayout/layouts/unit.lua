@@ -5,9 +5,6 @@ local function new(cnt)
     return cnt.geometry
   end
 
-  function data:repaint()
-  end
-
   return data
 end
 

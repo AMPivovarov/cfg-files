@@ -23,7 +23,7 @@ local function create_container(group, parent)
   }
 
   function cnt:__init()
-    cnt:set_layout(self.group.config.default_layout or layouts.tile)
+    cnt:set_layout(self.group.config.default_layout or layouts.h_split)
   end
 
   function cnt:get_leaves(to_return)
@@ -54,10 +54,6 @@ local function create_container(group, parent)
         v:do_layout()
       end
     end
-  end
-
-  function cnt:do_repaint()
-    self.layout:repaint()
   end
 
   function cnt:add_child(cnt)
@@ -92,7 +88,7 @@ local function create_container(group, parent)
   local args = {
     autosignal_fields = {},
     mutable_fields = { "x", "y", "width", "height",
-                       "active" },
+                       "active", "parent" },
   }
 
   return object_model(cnt, private, args)
@@ -115,15 +111,11 @@ local function create_leaf(group, parent, client)
   }
 
   function cnt:__init()
-    private.layout = (self.group.config.default_leaf_layout or layouts.unit).new(cnt)
+    private.layout = layouts.unit.new(cnt)
   end
 
   function cnt:do_layout()
     return self.layout:layout()
-  end
-
-  function cnt:do_repaint()
-    self.layout:repaint()
   end
 
 
@@ -138,7 +130,8 @@ local function create_leaf(group, parent, client)
 
   local args = {
     autosignal_fields = {},
-    mutable_fields = { "x", "y", "width", "height" },
+    mutable_fields = { "x", "y", "width", "height",
+                       "parent" },
   }
 
   return object_model(cnt, private, args)
