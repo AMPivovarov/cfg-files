@@ -10,7 +10,7 @@ local function new(cnt, horizontal)
     local count = #c
 
     if horizontal then
-      local step = area.width / count
+      local step = math.floor(area.width / count)
       local x = area.x
       for k, v in pairs(c) do
         v.x = x
@@ -21,7 +21,7 @@ local function new(cnt, horizontal)
         x = x + step
       end
     else
-      local step = area.height / count
+      local step = math.floor(area.height / count)
       local y = area.y
       for k, v in pairs(c) do
         v.x = area.x

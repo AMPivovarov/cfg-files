@@ -2,7 +2,8 @@ local awful         = require("awful")
 local table         = require("util.table")
 local checks        = require("util.checks")
 local object_model  = require("ultraLayout.object_model")
-local create_container = require("ultraLayout.containers")
+local create_container   = require("ultraLayout.containers")
+local create_decorations = require("ultraLayout.decorations")
 
 local null = object_model.null
 
@@ -18,6 +19,7 @@ local function create_group(screen, config)
     root          = null,
 
     focus         = null,
+    decorations   = null,
   }
   local group = {
   }
@@ -25,12 +27,14 @@ local function create_group(screen, config)
   function group:__init()
     private.root  = create_container(group)
     private.focus = self.root
+    private.decorations = create_decorations(group)
   end
 
 
   function group.arrange(p)
     group.root.geometry = p.workarea
     group.root:do_layout()
+    group.decorations:clear()
 
     local clients = {}
     for k, v in pairs(group.root:get_leaves()) do
@@ -42,6 +46,8 @@ local function create_group(screen, config)
         p.geometries[c] = clients[c]
       end
     end
+
+    group.decorations:show()
   end
 
 
