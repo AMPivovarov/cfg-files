@@ -431,6 +431,13 @@ util.register_global_keys_mode({ modkey }, "l", util.join(
   awful.key({ modkey,               }, "[",         function() ultra.move_focus_parent()          end),
   awful.key({ modkey,               }, "]",         function() ultra.move_focus_child()           end),
 
+  awful.key({ modkey,         shift }, "Up",        function() ultra.move_container_side("up")    end),
+  awful.key({ modkey,         shift }, "Down",      function() ultra.move_container_side("down")  end),
+  awful.key({ modkey,         shift }, "Left",      function() ultra.move_container_side("left")  end),
+  awful.key({ modkey,         shift }, "Right",     function() ultra.move_container_side("right") end),
+
+  awful.key({ modkey,         shift }, "[",         function() ultra.move_container_parent()      end),
+
   awful.key({ modkey,               }, "h",         function() ultra.set_layout(ultra.layouts.h_split) end),
   awful.key({ modkey,               }, "v",         function() ultra.set_layout(ultra.layouts.v_split) end)
 ))

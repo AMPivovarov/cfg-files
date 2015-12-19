@@ -56,8 +56,8 @@ local function create_container(group, parent)
     end
   end
 
-  function cnt:add_child(cnt)
-    local index = self.active_index or 0
+  function cnt:add_child(cnt, index)
+    local index = index or self.active_index or 0
     table.insert(self.children, index + 1, cnt)
   end
 

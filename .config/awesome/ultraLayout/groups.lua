@@ -76,7 +76,11 @@ local function create_group(screen, config)
     end
 
     if was_focused then
-      self.focus = parent
+      local current = parent
+      while current.active do
+        current = current.active
+      end
+      self.focus = current
     end
 
     self:mark_dirty()
@@ -110,6 +114,63 @@ local function create_group(screen, config)
       end
       self.focus = target
     end
+  end
+
+
+  function group:move_container_parent()
+    local current = self.focus
+    local parent = current.parent
+    if current == self.root or parent == self.root then return end
+    local target = parent.parent
+
+    parent:remove_child(current)
+    target:add_child(current)
+    current.parent = target
+
+    if parent:is_empty() then
+      target:remove_child(parent)
+    end
+
+    self:update_active_by_focus()
+    self:mark_dirty()
+  end
+
+  function group:move_container_side(direction)
+    checks.assert_one_of(direction, { "left", "right", "up", "down" })
+    local current = self.focus
+    local parent = current.parent
+    if current == self.root then return end
+
+    local cnt = current.leaf and current.parent or current
+    local target
+    while cnt and target == nil do
+      target = cnt:move_focus_side(direction)
+      cnt = cnt.parent
+    end
+
+    if not target then return end
+    if target.leaf then
+      local target_leaf = target
+      local target = target.parent
+
+      if target ~= parent then
+        local index = table.index_of(target.children, target_leaf)
+        target:add_child(current, index)
+        parent:remove_child(current)
+        current.parent = target
+      else
+        parent:remove_child(current)
+        local index = table.index_of(target.children, target_leaf)
+        target:add_child(current, index)
+      end
+    else
+      parent:remove_child(current)
+      target:add_child(current)
+      current.parent = target
+    end
+
+    self:update_active_by_focus()
+    self:mark_dirty()
   end
 
 
@@ -147,16 +208,20 @@ local function create_group(screen, config)
     end
   end
 
+  function group:update_active_by_focus()
+    local focus = self.focus
+    local current = focus
+    while current ~= group.root do
+      current.parent.active = current
+      current = current.parent
+    end
+  end
 
   local function set_focus(to_focus)
     if private.focus == to_focus then return end
     private.focus = to_focus
 
-    local current = to_focus
-    while current ~= group.root do
-      current.parent.active = current
-      current = current.parent
-    end
+    group:update_active_by_focus()
 
     if to_focus.leaf then
       client.focus = to_focus.client

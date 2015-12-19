@@ -63,6 +63,20 @@ module.move_focus_side = function(direction, tag)
   group:move_focus_side(direction)
 end
 
+module.move_container_parent = function(tag)
+  local group = get_group(tag)
+  if not group then return end
+
+  group:move_container_parent()
+end
+
+module.move_container_side = function(direction, tag)
+  local group = get_group(tag)
+  if not group then return end
+
+  group:move_container_side(direction)
+end
+
 module.set_layout = function(layout, tag)
   local group = get_group(tag)
   if not group then return end
