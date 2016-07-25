@@ -29,11 +29,25 @@ promptinit
 colors
 
 
+setopt prompt_subst
+
 if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]] ; then
     PROMPT="${fg_lred}%n${fg_default}@${fg_green}%m${fg_default}:${fg_blue}%~${fg_default}$ "
 else
     PROMPT="${fg_lred}%n${fg_default}:${fg_blue}%~${fg_default}$ "
 fi
+
+function check_last_exit_code() {
+  local LAST_EXIT_CODE=$?
+  if [[ $LAST_EXIT_CODE -ne 0 ]]; then
+    local EXIT_CODE_PROMPT=' '
+    EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
+    EXIT_CODE_PROMPT+="%{$fg_bold[red]%}$LAST_EXIT_CODE%{$reset_color%}"
+    EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
+    echo "$EXIT_CODE_PROMPT"
+  fi
+}
+RPROMPT='$(check_last_exit_code) '
 
 
 HISTSIZE=1000
