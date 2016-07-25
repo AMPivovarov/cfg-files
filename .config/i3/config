@@ -4,6 +4,7 @@ set $alt Mod1
 #font pango:DejaVu Sans Mono 8
 font pango:sans 8
 
+focus_follows_mouse no
 
 # Use LMB+$mod to move floating windows
 # Use RMB+$mod to resize floating windows. +Shift to keep proportions.
