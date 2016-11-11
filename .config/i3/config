@@ -199,6 +199,10 @@ bar {
         #status_command i3status
         status_command $HOME/.config/i3/conky-i3bar
 
+        #disable switching workspace by mouse wheel
+        bindsym button4 nop
+        bindsym button5 nop
+
         colors {
                 statusline $fg_normal
                 background $background
