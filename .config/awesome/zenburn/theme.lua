@@ -14,7 +14,7 @@ theme.wallpaper_cmd = { awful.util.spawn("hsetroot -solid '#131313'") }
 -- }}}
 
 -- {{{ Styles
-theme.font      = "sans 8"
+theme.font      = "sans 16"
 -- theme.font      = "Profont 8"
 
 -- {{{ Colors

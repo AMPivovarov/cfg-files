@@ -128,7 +128,7 @@ for s = 1, screen.count() do
 
   mywibox[s] = awful.wibox({
     screen = s,
-    height = 18,
+    height = 32,
     position = "top",
     fg = beautiful.fg_normal,
     bg = beautiful.bg_normal,
