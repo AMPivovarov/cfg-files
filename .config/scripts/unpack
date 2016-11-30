@@ -1,6 +1,8 @@
 #!/bin/zsh
 if hash atool 2>/dev/null ; then
     aunpack "$@"
+elif hash unar 2>/dev/null ; then
+    unar "$@"
 else
     if [[ -f "$1" ]] ; then
         case $1 in
