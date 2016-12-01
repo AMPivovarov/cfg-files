@@ -126,10 +126,6 @@ bindsym $mod+Shift+r            restart
 bindsym $mod+Shift+q            exec "i3-msg exit"
 
 
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
-bindsym XF86AudioMute exec amixer -q set Master toggle
-
 
 bindsym $mod+r                  mode "resize"
 mode "resize" {
