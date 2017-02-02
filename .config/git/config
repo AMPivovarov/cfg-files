@@ -8,6 +8,8 @@
 	cc = commit
 	c = checkout
 	ri = rebase -i
+	rih = "!f() { git rebase -i HEAD~$@; }; f"
+	rsh = "!f() { git reset --hard HEAD~$@; }; f"
 	graph = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 [push]
 	default = simple
