@@ -39,3 +39,6 @@
 
 !.config/git/
 !.config/git/config
+
+**/.idea/**
+**/*.iml
