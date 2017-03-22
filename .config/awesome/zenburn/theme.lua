@@ -10,7 +10,7 @@ local theme = {}
 theme.confdir       = awful.util.getdir("config")
 theme.zenburn_dir   = awful.util.getdir("config") .. "/zenburn"
 --theme.wallpaper     = { theme.zenburn_dir .. "/zenburn-background.png" }
-theme.wallpaper_cmd = { awful.util.spawn("hsetroot -solid '#131313'") }
+theme.wallpaper = function() awful.util.spawn_with_shell("xsetroot -solid '#131313'") end
 -- }}}
 
 -- {{{ Styles
