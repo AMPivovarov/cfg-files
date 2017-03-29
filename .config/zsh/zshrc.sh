@@ -11,7 +11,7 @@ source $ZSH/alias.sh
 eval `dircolors ~/.dir_colors`
 
 
-fpath=($SCRIPTS_DIR/completions $ZSH_PLUGINS/zsh-completions/src $fpath)
+fpath=($ZSH/completions $SCRIPTS_DIR/completions $ZSH_PLUGINS/zsh-completions/src $fpath)
 export PATH="$PATH:$HOME/.bin/:$SCRIPTS_DIR"
 export EDITOR='vim'
 
