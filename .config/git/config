@@ -6,6 +6,7 @@
 [alias]
 	s = status -sb
 	cc = commit
+	cca = commit --amend
 	c = checkout
 	i = rebase -i
 	ih = "!f() { git rebase -i HEAD~$@; }; f"
