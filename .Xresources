@@ -21,9 +21,15 @@ URxvt.font: xft:Source Code Pro:size=10
 URxvt.boldFont:
 URxvt.boldItalicFont:
 
-URxvt.perl-ext-common: default,clipboard,tabbedex
+URxvt.perl-ext-common: default,tabbedex
 URxvt.modifier: mod4
 URxvt.saveLines: 12000
+
+# rebind Ctrl+Ins / Shift+Ins from PRIMARY selection to CLIPBOARD
+URxvt.keysym.C-M-c:    builtin-string:
+URxvt.keysym.C-M-v:    builtin-string:
+URxvt.keysym.C-Insert: eval:selection_to_clipboard
+URxvt.keysym.S-Insert: eval:paste_clipboard
 
 URxvt.scrollTtyOutput: false
 URxvt.scrollWithBuffer: true
