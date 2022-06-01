@@ -42,5 +42,10 @@
 !.config/git/
 !.config/git/config
 
+!.config/xfce4/
+!.config/xfce4/xfconf
+!.config/xfce4/xfconf/xfce-perchannel-xml/
+!.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
+
 **/.idea/**
 **/*.iml
