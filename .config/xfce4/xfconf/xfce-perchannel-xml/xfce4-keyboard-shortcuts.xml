@@ -35,8 +35,8 @@
       </property>
       <property name="&lt;Super&gt;s" type="string" value="subl"/>
       <property name="&lt;Super&gt;Return" type="string" value="urxvt"/>
-      <property name="Print" type="string" value="/home/user/.config/scripts/scrot-wrapper"/>
-      <property name="&lt;Shift&gt;Print" type="string" value="/home/user/.config/scripts/scrot-wrapper -d 2"/>
+      <property name="Print" type="string" value="/home/pivovarov/.config/scripts/scrot-wrapper"/>
+      <property name="&lt;Shift&gt;Print" type="string" value="/home/pivovarov/.config/scripts/scrot-wrapper -d 2"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
